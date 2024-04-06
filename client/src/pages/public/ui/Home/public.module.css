@@ -1,0 +1,27 @@
+.homeWrapper {
+	/* width: min(100% - 1rem, 80ch); */
+	margin-inline: auto;
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+   /*  background: no-repeat center/cover url('src/shared/assets/bg.svg');  */
+}
+
+.main {
+	
+    color: var(--text);
+}
+
+.heading {
+    font-weight: 700;
+    font-size: var(--fontSize-3);
+}
+
+.subHeading {
+    font-weight: 500;
+    font-size: var(--fontSize-1);
+}
+
+.cta {
+    color: var(--dark);
+}

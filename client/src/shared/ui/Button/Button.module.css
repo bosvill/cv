@@ -1,0 +1,21 @@
+.btn {
+	width: 100%;
+	font-weight: 700;
+	font-size: var(--fontSize-0);
+	color: var(--light);
+	text-transform: uppercase;
+	background-color: #3f576e;
+	padding: 0.6rem 1rem;
+	/* text-shadow: 0.1rem 0.1rem 0.3rem var(--shadow-1);  */
+	cursor: pointer;
+	border: none;
+	box-shadow: 0.1rem 0.1rem 0.3rem var(--shadow-1);
+	transition: all 0.5s ease-out;
+
+	&:hover,
+	:active,
+	:focus {
+		opacity: 80%;
+		color: var(--light-1);
+	}
+}

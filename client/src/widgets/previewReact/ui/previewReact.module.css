@@ -1,0 +1,14 @@
+.container{
+    --react: #087ea4;
+	--bg-dark:#23272f;
+	--dark:#343a46;
+	--text-light:rgba(246, 247, 249, 0.8);
+	--text-dark:#070707;
+    
+    appearance: none;
+	max-width: 595px;
+	max-height: 842px;
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	border: 1px solid var(--react);
+}

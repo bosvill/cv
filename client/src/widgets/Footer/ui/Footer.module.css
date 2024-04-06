@@ -1,0 +1,18 @@
+.footer {
+	width: 100%;
+	text-align: center;
+	color: var(--light);
+	 background: no-repeat center/cover url('src/shared/assets/new_file.svg'); 
+}
+
+.nav {
+	display: flex;
+	justify-content: center;
+	gap: var(--space-sx);
+}
+
+.info {
+	font-size: var(--fontSize-0);
+	color: var(--light-1);
+	margin-bottom: var(--space-xs);
+}

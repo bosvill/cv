@@ -1,0 +1,18 @@
+.btn {
+	appearance: none;
+	cursor: pointer;
+    background-color: transparent;
+	transition: all 0.5s ease-out;
+    display: flex;
+    align-items: center;
+    & .btn:active,
+    .btn:focus {
+        outline: none;
+        border: 2px solid var(--greyT);
+    } 
+    & .btn:hover {
+        opacity: 80%;
+}}
+
+
+    

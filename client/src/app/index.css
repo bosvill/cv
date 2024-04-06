@@ -1,0 +1,89 @@
+@import 'src/shared/css/colors.css';
+@import 'src/shared/css/spaces.css';
+@import 'src/shared/css/fontsizes.css';
+@import 'src/shared/css/reset.css';
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+/* Set core body defaults */
+body {
+	line-height: 1.2;
+	font-family: system-ui, sans-serif;
+	font-size: var(--fontSize-0);
+	background: var(--bg);
+	color: var(--text);
+}
+
+/* Set core #root defaults */
+#root {
+	min-height: 100vh;
+	margin-inline: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	/*  background: no-repeat center/cover url('src/assets/new_file(3).svg');  */
+}
+
+/* Make images easier to work with */
+img,
+picture {
+	max-width: 100%;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+	font-family: inherit;
+	border: none;
+	filter: none;
+}
+
+/*Default styling for elements without class*/
+a {
+	/* font-family: 'Montserrat', sans-serif; */
+	font-weight: inherit;
+	color: inherit;
+	text-decoration: none;
+}
+
+/* Button loader */
+.loader {
+	width: 1rem;
+	height: 1rem;
+	border: 0.1rem solid var(--bg);
+	border-top: 0.1rem solid var(--accent-2);
+	border-right: 0.1rem solid var(--light);
+	border-bottom: 0.1rem solid var(--accent);
+	animation: spinner 1.5s linear infinite;
+}
+
+h1,
+h2,
+h3 {
+	line-height: 1.5;
+	/* text-wrap: balance; */
+}
+
+/*List styles */
+::marker {
+	color: var(--accent-2);
+}
+
+.flow > * + * {
+	margin-top: 1em;
+}
+
+/*Active NavLink */
+.active {
+	color: var(--accent-1);
+}

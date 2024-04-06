@@ -1,0 +1,13 @@
+.input {
+	accent-color: var(--accent);
+    margin-right: var(--space-xs);
+    margin-bottom: var(--space-xs);
+    cursor: pointer;
+    width: 2rem;
+}
+
+.label {
+	color: var(--light-1);
+	font-weight: 500;
+	font-size: var(--fontSize-0); 
+}

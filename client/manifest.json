@@ -1,0 +1,21 @@
+{
+	"name": "TechCV",
+	"short_name": "TechCV",
+	"start_url": ".",
+	"display": "standalone",
+	"background_color": "#fafafaf2",
+	"description": "Create your CV",
+	"icons": [
+		{
+			"src": "sprites.svg",
+			"sizes": "20x20",
+			"type": "image/svg+xml"
+		}
+	],
+	"related_applications": [
+		{
+			"platform": "play",
+			"url": ""
+		}
+	]
+}

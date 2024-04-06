@@ -1,0 +1,36 @@
+ .content {
+	max-width: 420px;
+}  
+
+.title {
+	font-family: inherit;
+	font-size: var(--fontSize-3);
+	color: var(--accent);
+	text-shadow: 0.1rem 0.1rem 0.3rem var(--shadow);
+	margin-bottom: var(--space-m);
+}
+
+.formItem {
+	margin-top: var(--space-xs);
+ 
+	&:last-child {
+		margin-top: var(--space-m);
+	}
+}
+
+.iconItem{
+	display: flex;
+}
+
+.link {
+	color: var(--text-darker);
+
+	&:hover,
+	:focus {
+		color: var(--text);
+	}
+}
+
+.error {
+	color: var(--error);
+}

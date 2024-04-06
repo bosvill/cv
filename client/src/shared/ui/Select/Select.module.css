@@ -1,0 +1,51 @@
+.content {
+	width: 100%;
+	display: flex;
+	flex-flow: column nowrap;
+	gap: var(--space-3xs);
+}
+
+.label {
+	color: var(--light-1);
+	font-weight: 500;
+	font-size: var(--fontSize-0); 
+}
+
+.error {
+	color: var(--error);
+}
+
+
+.select {
+	width: 100%;
+	height: 2rem;
+	cursor: pointer;
+	background-color: var(--light);
+	padding: var(--space-3xs);
+	box-shadow: 0.05rem 0.1rem 0.1rem 0.05rem var(--shadow);
+
+	&:hover,
+	:focus,
+	:focus-visible,
+	:active {
+		border-bottom: 0.1em solid var(--accent-2);
+	}
+}
+
+.option {
+	appearance: none;
+
+	height: 2.5rem;
+	padding: 0.3rem;
+	border-bottom: 0.1em solid var(--accent-2);
+	cursor: pointer;
+	transition: all 0.5s ease-out;
+
+	&:active {
+		height: 3rem;
+		text-align: center;
+		font-size: 1rem;
+		outline: none;
+	}
+}
+

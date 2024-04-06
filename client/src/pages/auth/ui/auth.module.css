@@ -1,0 +1,26 @@
+
+
+.wrapper {
+	margin-inline: auto;
+	background: transparent;
+	padding: var(--space-s);
+	width: min(100% - 3rem, 60ch);
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+}
+
+.registerSection {
+	background: transparent;
+}
+
+.linkItem{
+	font-size: var(--fontSize-1);
+	margin-top: var(--space-xs);
+	text-align: left;
+}
+.link{
+	color: var(--accent);
+	padding-left: var(--space-xs);
+
+}

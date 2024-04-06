@@ -1,0 +1,137 @@
+.aside {
+	width: 235px;
+	background-color: var(--dark);
+    font-size: var(--fontSize--1);
+    font-weight: 500;
+	color: var(--text-light);
+	/* background: no-repeat center/cover url('src/assets/react-gradient-haikei.svg'); */
+	padding: var(--space-xs);
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-s);
+	box-shadow: 2px 2px -6px var(--shadow-1);
+}
+
+.imgWrapper {
+	align-self: center;
+}
+.img {
+	width: 7rem;
+	height: 7rem;
+	border-radius: 50%;
+}
+
+.title {
+	/* text-align: center; */
+	margin-bottom: var(--space-xs);
+}
+
+.address {
+	display: flex;
+	align-items: center;
+	gap: var(--space-2xs);
+}
+
+.svg {
+	width: 15px;
+	height: 15px;
+	padding: 0;
+	margin: 0;
+	border: none;
+	background-color: transparent;
+	stroke: var(--react);
+	cursor: pointer;
+	fill: none;
+
+	&:hover,
+	:focus {
+		stroke: var(--accent-2);
+	}
+}
+
+/* .meter meter {
+	 -moz-appearance: none;
+	 -webkit-appearance: none; /* Reset appearance 
+  width: 500px;
+  height: 25px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background-color: #087ea4;
+}
+
+.meter meter:-moz-meter-optimum::-moz-meter-bar,
+.meter meter:-moz-meter-sub-optimum::-moz-meter-bar,
+.meter meter:-moz-meter-sub-sub-optimum::-moz-meter-bar,
+.meter meter:-webkit-meter-bar,
+meter::-moz-meter-bar  {
+  background: none;  Required to get rid of the default background property 
+  background-color: var(--react);
+  box-shadow: 0 5px 5px -5px #333 inset;
+}
+
+.meter meter::-webkit-meter-optimum-value {
+  box-shadow: 0 5px 5px -5px #999 inset;
+  background-color: #087ea4;
+  background-size: 100% 100%;
+}
+ */
+
+
+.styled meter {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  width: 100%;
+  height: 30px;
+  
+  /* For Firefox */
+  background: #EEE;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.2) inset;
+  border-radius: 3px;
+}
+
+/* WebKit */
+.styled meter::-webkit-meter-bar {
+  background: #EEE;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.2) inset;
+  border-radius: 3px;
+}
+
+.styled meter::-webkit-meter-optimum-value,
+.styled meter::-webkit-meter-suboptimum-value,
+.styled meter::-webkit-meter-even-less-good-value {
+  border-radius: 3px;
+}
+
+.styled meter::-webkit-meter-optimum-value {
+  background: var(--react);
+}
+
+.styled meter::-webkit-meter-suboptimum-value {
+  background:var(--accent);
+}
+
+.styled meter::-webkit-meter-even-less-good-value  {
+  background:var(--accent-2);
+}
+
+
+/* Firefox */
+.styled meter::-moz-meter-bar {
+  border-radius: 3px;
+}
+
+.styled meter:-moz-meter-optimum::-moz-meter-bar {
+  background: var(--react);
+}
+
+.styled meter:-moz-meter-sub-optimum::-moz-meter-bar {
+  background:var(--accent);
+}
+
+.styled meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
+  background: var(--accent-2);
+}
+

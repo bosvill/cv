@@ -1,0 +1,7 @@
+.container {
+    margin: var(--space-m);
+}
+
+.errMsg{
+    color: var(--error);
+}

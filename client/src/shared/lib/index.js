@@ -1,0 +1,1 @@
+export { showDate } from './date'

@@ -1,0 +1,49 @@
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+fieldset,
+article,
+figure,
+blockquote,
+dl,
+dd {
+	margin: 0;
+}
+
+/* Remove list styles */
+ul,
+ul li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	text-indent: 0;
+}
+
+/*Remove outline (outline:none impacts accessibility)*/
+button:active,
+textarea:focus,
+input:hover,
+input:focus-visible,
+input:focus,
+select {
+	outline: 1px solid transparent;
+}
+
+/* Remove Chrome autofill color from inputs*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	transition: background-color 5000000s ease-in-out 0s;
+}
+
+/*remove webkit background-color in Firefox*/
+input:autofill {
+	background: transparent;
+}

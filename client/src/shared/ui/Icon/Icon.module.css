@@ -1,0 +1,35 @@
+.svg {
+	width: 18px;
+	height: 18px;
+	padding: 0;
+	margin: 0;
+	border: none;
+	background-color: transparent;
+	stroke: var(--light-1);
+	cursor: pointer;
+	fill: none;
+
+	&:hover,
+	:focus {
+		stroke: var(--accent-2);
+	}
+
+	&:active {
+		stroke: var(--accent-1);
+	}
+}
+
+.menu {
+	width: 40px;
+	height: 40px;
+}
+
+.eye {
+	width: 20px;
+	height: 20px;
+	border: none;
+	background-color: var(--light);
+	padding: var(--space-3xs);
+	stroke: var(--light-2);
+	cursor: pointer;
+}
