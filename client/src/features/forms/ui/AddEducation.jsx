@@ -55,12 +55,12 @@ export const AddEducation = ({ id, education, data }) => {
 									type='date'
 									name={`education.${index}.end`}
 									label='End date'
-									disabled={watch('present')}
+									disabled={watch(`education.${index}.present`) === true}
 									defaultValue={education?.[index]?.end}
 									register={register}
 								/>
 								<div className={styles.check}>
-									<input type='checkbox' name='present' />
+									<input type='checkbox' {...register(`education.${index}.present`)} />
 									<label htmlFor='present' className={styles.label}>
 										Present
 									</label>
@@ -71,7 +71,7 @@ export const AddEducation = ({ id, education, data }) => {
 								name={`education.${index}.school`}
 								type='text'
 								label='School'
-								/* defaultValue={education ?education?.[index]?.school:null} */
+								defaultValue={education?.[index]?.school}
 								register={register}
 							/>
 							<Field
@@ -80,8 +80,8 @@ export const AddEducation = ({ id, education, data }) => {
 								type='text'
 								label='Subject'
 								errors={errors?.subject}
-								defaultValue={education?.[index]?.subject}
 								register={register}
+								defaultValue={education?.[index]?.subject}
 							/>
 							<Field
 								id='degree'
@@ -89,8 +89,8 @@ export const AddEducation = ({ id, education, data }) => {
 								type='text'
 								label='Degree'
 								errors={errors?.degree}
-								defaultValue={education?.[index]?.degree}
 								register={register}
+								defaultValue={education?.[index]?.degree}
 							/>
 						</article>
 						<div className={styles.trash}>

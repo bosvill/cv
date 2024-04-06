@@ -53,16 +53,12 @@ export const AddWork = ({ id, work, data }) => {
 									type='date'
 									name={`work.${index}.end`}
 									label='End date'
-									disabled={watch('present')}
-									defaultValue={work?.[index]?.end}
+									disabled={watch(`work.${index}.present`) === true}
 									register={register}
+									defaultValue={work?.[index]?.end}
 								/>
 								<div className={` ${styles.check}`}>
-									<input
-										type='checkbox'
-										name='present'
-										defaultValue={work?.[index]?.present}
-									/>
+									<input type='checkbox' {...register(`work.${index}.present`)} />
 									<label htmlFor='present' className={styles.label}>
 										Present
 									</label>

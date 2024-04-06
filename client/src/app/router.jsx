@@ -1,21 +1,20 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
 
-import {ErrorBoundary }from 'shared/ui'
+import { ErrorBoundary } from 'shared/ui'
 import AppLayout from './AppLayout'
 import PrivateOutlet from './PrivateOutlet'
-import Public from 'pages/Public'
 import UserProfile from 'pages/user'
-import {Login} from 'pages/auth'
-import {Register} from 'pages/auth'
+import { Login } from 'pages/auth'
+import { Register } from 'pages/auth'
 import Preview from 'pages/cv/Preview'
 import Home from 'pages/public'
 
-import {Education} from 'widgets/cv'
-import {Profile} from 'widgets/cv'
-import {Work} from 'widgets/cv'
+import { Education } from 'widgets/cv'
+import { Profile } from 'widgets/cv'
+import { Work } from 'widgets/cv'
 import { PreviewReact } from 'widgets/previewReact'
 
-import {CV} from 'features/forms'
+import { CV } from 'features/forms'
 
 import { AddHardskills, AddInfo, AddLanguages, AddSoftskills } from 'features/forms'
 
@@ -37,20 +36,6 @@ const router = createBrowserRouter(
 				<Route path='softskills/:id' element={<AddSoftskills />} />
 				<Route path='languages/:id' element={<AddLanguages />} />
 				<Route path='preview/:id' element={<PreviewReact />} />
-				{/* <Route path='users' element={<UsersList />} />
-				
-				<Route path='display/info' element={<Info />} />
-				
-				<Route path='display/hardskills' element={<DisplayHardSkills />} />
-				<Route path='display/softskills' element={<DisplaySoftskills />} />
-				<Route path='display/languages' element={<DisplayLanguages />} />
-				<Route path='display/education' element={<DisplayEducation />} />
-				<Route path='display/work' element={<DisplayWork />} />
-				<Route path='save' element={<SaveCV />} />
-				<Route path='displayall' element={<DisplayAll/>} />
-				<Route path='cv/:id' element={<DisplayCV/>} /> */}
-				{/*
-				<Route path='cv/display' element={<DisplayCV />} />*/}
 			</Route>
 		</Route>
 	)

@@ -8,15 +8,15 @@
 .label {
 	color: var(--light-1);
 	font-weight: 500;
-	font-size: var(--fontSize-0); 
+	font-size: var(--fontSize-0);
 }
 
 .error {
 	color: var(--error);
 }
 
-
 .select {
+	color: var(--accent);
 	width: 100%;
 	height: 2rem;
 	cursor: pointer;
@@ -42,10 +42,10 @@
 	transition: all 0.5s ease-out;
 
 	&:active {
+		color: var(--accent);
 		height: 3rem;
 		text-align: center;
 		font-size: 1rem;
 		outline: none;
 	}
 }
-
