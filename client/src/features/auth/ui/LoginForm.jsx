@@ -38,7 +38,7 @@ export const LoginForm = () => {
 						autoFocus
 						id='email'
 						name='email'
-						type='email'
+						type='text'
 						label='Email'
 						errors={errors?.email}
 						register={register}
