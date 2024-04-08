@@ -14,7 +14,7 @@ export const Field = ({ id, name, label, register, errors, rules, ...props }) =>
 				)}
 
 				<input
-					/* aria-invalid={errors.name ? 'true' : 'false'} */
+					 aria-invalid={errors?.name ? 'true' : 'false'} 
 					name={name}
 					className={styles.input}
 					aria-label={label}

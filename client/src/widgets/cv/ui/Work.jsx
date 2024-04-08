@@ -5,6 +5,9 @@ import {WorkIntro }from 'entities/intro'
 import styles from './cv.module.css'
 
 export const Work = () => {
+
+/* const [isExpanded, setIsExpanded] = useState(false)
+const [activeIndex, setActiveIndex] = useState() */
 	const { id } = useParams()
 
 	const { data, isLoading, isError, error, isFetching } = useGetCVQuery(id)

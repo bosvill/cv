@@ -1,8 +1,8 @@
 .aside {
 	width: 235px;
 	background-color: var(--dark);
-    font-size: var(--fontSize--1);
-    font-weight: 500;
+	font-size: var(--fontSize--1);
+	font-weight: 500;
 	color: var(--text-light);
 	/* background: no-repeat center/cover url('src/assets/react-gradient-haikei.svg'); */
 	padding: var(--space-xs);
@@ -76,62 +76,80 @@ meter::-moz-meter-bar  {
 }
  */
 
-
 .styled meter {
-  /* Reset the default appearance */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+	/* Reset the default appearance */
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 
-  width: 100%;
-  height: 30px;
-  
-  /* For Firefox */
-  background: #EEE;
-  box-shadow: 0 2px 3px rgba(0,0,0,0.2) inset;
-  border-radius: 3px;
+	width: 100%;
+	height: 30px;
+
+	/* For Firefox */
+	background: #eee;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2) inset;
+	border-radius: 3px;
 }
 
 /* WebKit */
 .styled meter::-webkit-meter-bar {
-  background: #EEE;
-  box-shadow: 0 2px 3px rgba(0,0,0,0.2) inset;
-  border-radius: 3px;
+	background: #eee;
+	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2) inset;
+	border-radius: 3px;
 }
 
 .styled meter::-webkit-meter-optimum-value,
 .styled meter::-webkit-meter-suboptimum-value,
 .styled meter::-webkit-meter-even-less-good-value {
-  border-radius: 3px;
+	border-radius: 3px;
 }
 
 .styled meter::-webkit-meter-optimum-value {
-  background: var(--react);
+	background: var(--react);
 }
 
 .styled meter::-webkit-meter-suboptimum-value {
-  background:var(--accent);
+	background: var(--accent);
 }
 
-.styled meter::-webkit-meter-even-less-good-value  {
-  background:var(--accent-2);
+.styled meter::-webkit-meter-even-less-good-value {
+	background: var(--accent-2);
 }
-
 
 /* Firefox */
 .styled meter::-moz-meter-bar {
-  border-radius: 3px;
+	border-radius: 3px;
 }
 
 .styled meter:-moz-meter-optimum::-moz-meter-bar {
-  background: var(--react);
+	background: var(--react);
 }
 
 .styled meter:-moz-meter-sub-optimum::-moz-meter-bar {
-  background:var(--accent);
+	background: var(--accent);
 }
 
 .styled meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
-  background: var(--accent-2);
+	background: var(--accent-2);
+}
+.langItem {
+	display: flex;
+	gap: var(--space-xs);
+}
+.bar {
+	display: flex;
+	gap: var(--space-xs);
+justify-content: center;
+}
+.svgMeter {
+	width: 18px;
+	height: 18px;
+	fill: #61DAFB;
 }
 
+.line {
+	color: #61DAFB;
+	&:last-child {
+		display: none;
+	}
+}

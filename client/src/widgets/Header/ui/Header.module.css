@@ -4,14 +4,13 @@
 	height: 3rem;
 	display: flex;
 	justify-content: space-between;
-	gap: 1rem;
+	gap: var(--space-xs);
 	padding: 0.2rem 1rem;
-	color: var(--light);
-	/* background-color: var(--accent); */
-	 background: no-repeat center/cover url('src/shared/assets/header.svg'); 
+	background-color: var(--accent);
+	background: no-repeat center/cover url('src/shared/assets/header.svg');
 }
 
-@container (min-width: 900px) {
+/* @container (min-width: 900px) {
 	.header {
 		background: no-repeat center/cover url('src/shared/assets/M-layered-waves-haikei.svg');
 	}
@@ -21,85 +20,59 @@
 	.header {
 		background: no-repeat center/cover url('src/shared/assets/L-layered-waves-haikei.svg');
 	}
-}
+} */
 .nav {
 	display: flex;
 	align-items: center;
 	gap: 1rem;
 }
-
-.btn {
-	background-color: transparent;
-	color: var(--accent);
-	font-size: var(--fs-300);
-
-	&:hover,
-	:focus {
-		cursor: pointer;
-	}
-}
-
 .logoWrapper {
 	padding: 0.5rem;
 }
-
+.logo {
+	font: var(--fontSize-3) bold;
+	color: var(--accent);
+}
 .headerRight {
 	display: flex;
 	align-items: center;
+	color: var(--light);
+	font-size: var(--fontSize-1);
+	font-weight: 500;
 }
-
-.logo {
-	font: var(--fontSize-3) bold ;
-	color: var(--accent);
-}
-.loginBtn {
+.loginLink {
 	display: flex;
 	align-items: center;
 	gap: var(--space-3xs);
 	cursor: pointer;
 	background-color: transparent;
 
-	/* 
-	font-size: var(--fs-400);
-	margin-inline: var(--space-xs);
-	font-weight: 600; */
-
 	&:hover,
 	:focus {
-		color: var(--accent-2);
+		color: var(--light-1);
 	}
 
 	&.active {
 		color: var(--accent-2);
 	}
 }
-.iconBtn {
-	all: unset;
-	cursor: pointer;
-	outline: 1px solid transparent;
-	background-color: transparent;
-}
-
-
 .svg {
-	width: 18px;
-	height: 18px;
+	width: 15px;
+	height: 15px;
 	padding: 0;
 	margin: 0;
 	border: none;
 	background-color: transparent;
-	stroke: var(--light-1);
+	stroke: var(--light);
 	cursor: pointer;
 	fill: none;
 
 	&:hover,
 	:focus {
+		stroke: var(--light-1);
+	}
+
+	&:active {
 		stroke: var(--accent-2);
 	}
-
-	&:active{
-		stroke: var(--accent-1);
-	}
-	
 }
-

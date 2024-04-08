@@ -1,10 +1,11 @@
 import { Icon } from 'shared/ui'
 import styles from './templateReact.module.css'
 import { showLevel } from 'shared/lib/level'
+import { showMeter } from '../lib/showMeter'
 
-export const Sidebar = ({cv}) => {
+export const Sidebar = ({ cv }) => {
+	console.log(showMeter(5))
 
-	
 	return (
 		<aside className={styles.aside}>
 			<div className={styles.imgWrapper}>
@@ -81,16 +82,24 @@ export const Sidebar = ({cv}) => {
 				<ul>
 					{cv?.languages
 						? cv?.languages.map(el => (
-								<li key={el._id}>
-									{el.language}{' '}
-									<meter
-										className={styles.styled}
+								<li key={el._id} className={styles.langItem}>
+									<span>{el.language}</span>
+									<span className={styles.bar}>
+										{showMeter(showLevel(el.level)).map(e => (
+											<div>
+												<Icon id='react' className={styles.svgMeter} />
+												
+											</div>
+										))}
+									</span>
+									{/* <meter
+										className={styles.meter}
 										title='Level'
 										min='0'
 										max='6'
 										value={`${showLevel(el.level)}`}>
 										{showLevel(el.level)}
-									</meter>
+									</meter> */}
 								</li>
 						  ))
 						: null}
@@ -99,4 +108,3 @@ export const Sidebar = ({cv}) => {
 		</aside>
 	)
 }
-
