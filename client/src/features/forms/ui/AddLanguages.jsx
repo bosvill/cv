@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useForm, useFieldArray } from 'react-hook-form'
 import { useUpdateCVMutation, useGetCVQuery } from 'shared/api'
@@ -7,6 +7,7 @@ import { levels } from 'shared/consts'
 import styles from 'features/forms/ui/form.module.css'
 
 export const AddLanguages = () => {
+	const [activeIndex, setActiveIndex] = useState()
 	const { id } = useParams()
 
 	const navigate = useNavigate()
@@ -36,8 +37,8 @@ export const AddLanguages = () => {
 	const onNext = async data => {
 		try {
 			console.log('Add lang Data: ', data)
-		const res=	await updateCV({ id,...data })
-		console.log(res)
+			const res = await updateCV({ id, ...data })
+			console.log(res)
 			navigate(`/hardskills/${id}`)
 		} catch (err) {
 			return err
@@ -50,42 +51,60 @@ export const AddLanguages = () => {
 			{isError && <p className={styles.error}>{error.data?.message}</p>}
 			<form onSubmit={handleSubmit(onNext)}>
 				<div className={styles.fieldArray}>
-					{fields.map((field, index) => (
-						<fieldset className={styles.fieldset} key={field.id}>
-							<article className={styles.item}>
-								<div className={styles.languageItem}>
-									<Field
-										autoFocus
-										className={styles.input}
-										name={`languages.${index}.language`}
-										type='text'
-										label='Language'
-										defaultValue={languages?.[index]?.language}
-										errors={errors?.languages}
-										register={register}
-									/>
-									<Select
-										name={`languages.${index}.level`}
-										id='levels'
-										label='Level'
-										array={levels}
-										errors={errors?.level}
-										defaultValue={languages?.[index]?.level}
-										register={register}
-										rules={{
-											required: 'Level is required'
-										}}
-										size='5'
-									/>
+					{fields.map((field, index) =>
+						index === activeIndex ? (
+							<fieldset className={styles.fieldset} key={field.id}>
+								<article className={styles.item}>
+									<div className={styles.downBtn}>
+										<IconButton type='button' onClick={() => setActiveIndex()}>
+											<Icon id='chevronUp' className={styles.svg} />
+										</IconButton>
+									</div>
+									<div className={styles.languageItem}>
+										<Field
+											autoFocus
+											className={styles.input}
+											name={`languages.${index}.language`}
+											type='text'
+											label='Language'
+											defaultValue={languages?.[index]?.language}
+											/* errors={errors?.languages} */
+											register={register}
+										/>
+										<Select
+											name={`languages.${index}.level`}
+											id='levels'
+											label='Level'
+											array={levels}
+											errors={errors?.level}
+											defaultValue={languages?.[index]?.level}
+											/* register={register}
+											rules={{
+												required: 'Level is required'
+											}} */
+											size='5'
+										/>
+									</div>
+								</article>
+								<div className={styles.trash}>
+									<IconButton type='button' onClick={() => remove(index)}>
+										<Icon className={styles.svg} id='trash' />
+									</IconButton>
 								</div>
-							</article>
-							<div className={styles.trash}>
-								<IconButton type='button' onClick={() => remove(index)}>
-									<Icon className={styles.svg} id='trash' />
-								</IconButton>
+							</fieldset>
+						) : (
+							<div className={styles.fieldset}>
+								<article className={styles.collapsed}>
+									<p>
+										{languages?.[index]?.language} {languages?.[index]?.level}
+									</p>
+									<IconButton type='button' onClick={() => setActiveIndex(index)}>
+										<Icon id='chevronDown' className={styles.svg} />
+									</IconButton>
+								</article>
 							</div>
-						</fieldset>
-					))}
+						)
+					)}
 					<Button type='button' onClick={() => append()}>
 						Add
 					</Button>

@@ -6,8 +6,7 @@ import { Button, IconButton, Icon, Field, Text } from 'shared/ui'
 import styles from 'features/forms/ui/form.module.css'
 
 export const AddWork = ({ id, work, data }) => {
-	const [isExpanded, setIsExpanded] = useState(false)
-	const [activeIndex, setActiveIndex] = useState(0)
+	const [activeIndex, setActiveIndex] = useState()
 	const navigate = useNavigate()
 	const [updateCV] = useUpdateCVMutation()
 
@@ -43,14 +42,14 @@ export const AddWork = ({ id, work, data }) => {
 		<form onSubmit={handleSubmit(onNext)}>
 			<div className={styles.fieldArray}>
 				{fields.map((field, index) =>
-					isExpanded === activeIndex ? (
+					index === activeIndex ? (
 						<fieldset
 							className={styles.fieldset}
 							key={field?.id}
 							isExpanded={activeIndex === index}>
 							<article className={styles.item}>
 								<div className={styles.downBtn}>
-									<IconButton type='button' onClick={() => setIsCollapsed(true)}>
+									<IconButton type='button' onClick={() => setActiveIndex()}>
 										<Icon id='chevronUp' className={styles.svg} />
 									</IconButton>
 								</div>

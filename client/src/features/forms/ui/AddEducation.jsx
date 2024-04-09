@@ -6,7 +6,7 @@ import { Button, IconButton, Icon, Field } from 'shared/ui'
 import styles from 'features/forms/ui/form.module.css'
 
 export const AddEducation = ({ id, education, data }) => {
-	const [isCollapsed, setIsCollapsed] = useState(true)
+	const [activeIndex, setActiveIndex] = useState()
 	const navigate = useNavigate()
 	const [updateCV] = useUpdateCVMutation()
 
@@ -41,22 +41,11 @@ export const AddEducation = ({ id, education, data }) => {
 		<form onSubmit={handleSubmit(onNext)} className={styles.form}>
 			<div className={styles.fieldArray}>
 				{fields.map((field, index) =>
-					isCollapsed ? (
-						<div className={styles.fieldset}>
-							<article className={styles.collapsed}>
-								<p>
-									{education?.[index]?.degree} at {education?.[index]?.school}
-								</p>
-								<IconButton type='button' onClick={() => setIsCollapsed(false)}>
-									<Icon id='chevronDown' className={styles.svg} />
-								</IconButton>
-							</article>
-						</div>
-					) : (
+					index === activeIndex ? (
 						<fieldset className={styles.fieldset} key={field.id}>
 							<article className={styles.item}>
 								<div className={styles.downBtn}>
-									<IconButton type='button' onClick={() => setIsCollapsed(true)}>
+									<IconButton type='button' onClick={() => setActiveIndex()}>
 										<Icon id='chevronUp' className={styles.svg} />
 									</IconButton>
 								</div>
@@ -118,6 +107,17 @@ export const AddEducation = ({ id, education, data }) => {
 								</IconButton>
 							</div>
 						</fieldset>
+					) : (
+						<div className={styles.fieldset}>
+							<article className={styles.collapsed}>
+								<p>
+									{education?.[index]?.degree} at {education?.[index]?.school}
+								</p>
+								<IconButton type='button' onClick={() => setActiveIndex(index)}>
+									<Icon id='chevronDown' className={styles.svg} />
+								</IconButton>
+							</article>
+						</div>
 					)
 				)}
 
