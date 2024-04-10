@@ -1,24 +1,24 @@
-import React from 'react'
+
 import styles from './Field.module.css'
 
-export const Field = ({ id, name, label, register, errors, rules, ...props }) => {
+export const Field = ({ id, name, label, register, error, ...props }) => {
 	return (
 		<div className={styles.formControl}>
 			<label htmlFor={id} className={styles.label}>
-				{errors ? (
+				{error ? (
 					<span role='alert' className={styles.error}>
-						{errors.message}
+						{error.message}
 					</span>
 				) : (
 					label
 				)}
 
 				<input
-					 aria-invalid={errors?.name ? 'true' : 'false'} 
+					aria-invalid={error?.name ? 'true' : 'false'}
 					name={name}
 					className={styles.input}
 					aria-label={label}
-					{...(register && register(name, rules))}
+					{...register(name)}
 					autoComplete='true'
 					{...props}
 				/>

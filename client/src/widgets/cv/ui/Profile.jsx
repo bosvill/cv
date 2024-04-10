@@ -8,7 +8,7 @@ export const Profile = () => {
 	const { id } = useParams()
 
 	const { data, isLoading, isError, error, isFetching } = useGetCVQuery(id)
-	const { position, profile, image } = data?.cv || {}
+	const { position, profile } = data?.cv || {}
 
 	return (
 		<div className={styles.wrapper}>

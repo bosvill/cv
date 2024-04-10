@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState} from 'react'
 import { useForm, useFieldArray } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from 'react-router-dom'
 import { useUpdateCVMutation } from 'shared/api'
 import { Button, IconButton, Icon, Field } from 'shared/ui'
 import styles from 'features/forms/ui/form.module.css'
+import { educationSchema } from '../model/formsSchema'
 
-export const AddEducation = ({ id, education, data }) => {
+export const AddEducation = ({ id, education }) => {
 	const [activeIndex, setActiveIndex] = useState()
 	const navigate = useNavigate()
 	const [updateCV] = useUpdateCVMutation()
@@ -13,29 +15,36 @@ export const AddEducation = ({ id, education, data }) => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors, isSubmitting },
+		formState: { errors, isSubmitting},
 		control,
 		watch
-	} = useForm({ defaultValues: { ...education } })
+	} = useForm({
+		resolver: zodResolver(educationSchema),
+		defaultValues: { education: [...education] }
+	})
 
-	const { fields, append, remove, swap, move, insert, update } = useFieldArray({
+	const { fields, append, remove, update } = useFieldArray({
 		control,
 		name: 'education'
 	})
-	console.log(fields)
-	useEffect(() => {
-		education?.forEach((field, index) => {
-			console.log(field, index)
-			Object.keys(field).forEach(key => update(index, field[key]))
-		})
-	}, [education, update])
-
+	
 	const onNext = async data => {
-		console.log('Education data: ', data)
+		console.log('submitting Education data: ', data)
 		await updateCV({ id, data })
 		navigate(`/work/${id}`)
 	}
 
+	const onAppend = () => {
+		setActiveIndex(fields.length)
+		append({
+			start: '',
+			end: '',
+			present: false,
+			school: '',
+			subject: '',
+			degree: ''
+		})
+	}
 
 	return (
 		<form onSubmit={handleSubmit(onNext)} className={styles.form}>
@@ -45,17 +54,18 @@ export const AddEducation = ({ id, education, data }) => {
 						<fieldset className={styles.fieldset} key={field.id}>
 							<article className={styles.item}>
 								<div className={styles.downBtn}>
-									<IconButton type='button' onClick={() => setActiveIndex()}>
+									<IconButton onClick={() => setActiveIndex()}>
 										<Icon id='chevronUp' className={styles.svg} />
 									</IconButton>
 								</div>
 								<div className={styles.dateItem}>
 									<Field
+										autoFocus
 										id='start'
 										name={`education.${index}.start`}
 										type='date'
+										error={errors?.education?.[index]?.start}
 										label='Start date'
-										defaultValue={education?.[index]?.start}
 										register={register}
 									/>
 									<Field
@@ -63,8 +73,8 @@ export const AddEducation = ({ id, education, data }) => {
 										type='date'
 										name={`education.${index}.end`}
 										label='End date'
+										error={errors?.education?.[index]?.end}
 										disabled={watch(`education.${index}.present`) === true}
-										defaultValue={education?.[index]?.end}
 										register={register}
 									/>
 									<div className={styles.check}>
@@ -77,43 +87,38 @@ export const AddEducation = ({ id, education, data }) => {
 								<Field
 									id='school'
 									name={`education.${index}.school`}
-									type='text'
 									label='School'
-									defaultValue={education?.[index]?.school}
+									error={errors?.education?.[index]?.school}
 									register={register}
 								/>
 								<Field
 									id='subject'
 									name={`education.${index}.subject`}
-									type='text'
 									label='Subject'
-									errors={errors?.subject}
+									error={errors?.education?.[index]?.subject}
 									register={register}
-									defaultValue={education?.[index]?.subject}
 								/>
 								<Field
 									id='degree'
 									name={`education.${index}.degree`}
-									type='text'
 									label='Degree'
-									errors={errors?.degree}
+									error={errors?.education?.[index]?.degree}
 									register={register}
-									defaultValue={education?.[index]?.degree}
 								/>
 							</article>
 							<div className={styles.trash}>
-								<IconButton type='button' onClick={() => remove(index)}>
+								<IconButton onClick={() => remove(index)}>
 									<Icon id='trash' className={styles.svg} />
 								</IconButton>
 							</div>
 						</fieldset>
 					) : (
-						<div className={styles.fieldset}>
+						<div className={styles.fieldset} key={field?._id}>
 							<article className={styles.collapsed}>
 								<p>
-									{education?.[index]?.degree} at {education?.[index]?.school}
+									{fields?.[index]?.degree} at {fields?.[index]?.school}
 								</p>
-								<IconButton type='button' onClick={() => setActiveIndex(index)}>
+								<IconButton onClick={() => setActiveIndex(index)}>
 									<Icon id='chevronDown' className={styles.svg} />
 								</IconButton>
 							</article>
@@ -121,9 +126,13 @@ export const AddEducation = ({ id, education, data }) => {
 					)
 				)}
 
-				<Button type='button' onClick={() => append()}>
-					Add
-				</Button>
+				<button type='button' onClick={onAppend} className={styles.plusBtn}>
+					<span>
+						<Icon id='plus' className={styles.plus} />
+					</span>
+					<span>Add</span>
+				</button>
+
 				<Button type='submit' disabled={isSubmitting}>
 					{isSubmitting ? 'Loading' : 'Next'}
 				</Button>

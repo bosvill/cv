@@ -1,12 +1,12 @@
 import styles from './Text.module.css'
 
-export const Text = ({ id, name, label, register, errors, rules, ...props }) => {
+export const Text = ({ id, name, label, register, error, ...props }) => {
 	return (
 		<div className={styles.formControl}>
 			<label htmlFor={id} className={styles.label}>
-				{errors ? (
+				{error ? (
 					<span role='alert' className={styles.error}>
-						{errors.message}
+						{error.message}
 					</span>
 				) : (
 					label
@@ -15,7 +15,7 @@ export const Text = ({ id, name, label, register, errors, rules, ...props }) => 
 					className={styles.text}
 					name={name}
 					aria-label={label}
-					{...(register && register(name, rules))}
+					{...register(name)}
 					//autoComplete='true'
 					{...props}
 					rows={3}></textarea>

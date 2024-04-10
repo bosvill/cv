@@ -1,9 +1,11 @@
-import { useEffect } from 'react'
+
 import { useNavigate, useParams } from 'react-router-dom'
 import { useForm, useFieldArray } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useUpdateCVMutation, useGetCVQuery } from 'shared/api'
 import { Button, IconButton, Icon, Field } from 'shared/ui'
 import styles from 'features/forms/ui/form.module.css'
+import { softskillsSchema } from '../model/formsSchema'
 
 export const AddSoftskills = () => {
 	const { id } = useParams()
@@ -18,18 +20,15 @@ export const AddSoftskills = () => {
 		handleSubmit,
 		formState: { errors, isSubmitting },
 		control
-	} = useForm({ defaultValues: { ...softskills } })
+	} = useForm({
+		resolver: zodResolver(softskillsSchema),
+		defaultValues: { softskills: [...softskills] }
+	})
 
-	const { fields, append, update, remove, swap, move, insert } = useFieldArray({
+	const { fields, append,  remove } = useFieldArray({
 		control,
 		name: 'softskills'
 	})
-
-	useEffect(() => {
-		softskills.forEach((field, index) => {
-			Object.keys(field).forEach(key => update(index, field[key]))
-		})
-	}, [softskills, update])
 
 	const onNext = async data => {
 		try {
@@ -39,6 +38,10 @@ export const AddSoftskills = () => {
 		} catch (err) {
 			return err
 		}
+	}
+
+	const onAppend=()=>{
+		append({skill:''})
 	}
 
 	return (
@@ -57,7 +60,6 @@ export const AddSoftskills = () => {
 									name={`softskills.${index}.skill`}
 									type='text'
 									errors={errors?.softskills}
-									defaultValue={softskills?.[index]?.skill}
 									register={register}
 								/>
 								<IconButton type='button' onClick={() => remove(index)}>
@@ -66,9 +68,12 @@ export const AddSoftskills = () => {
 							</article>
 						</fieldset>
 					))}
-					<Button type='button' onClick={() => append()}>
-						Add Skill
-					</Button>
+					<button type='button' onClick={onAppend} className={styles.plusBtn}>
+						<span>
+							<Icon id='plus' className={styles.plus} />
+						</span>
+						<span>Add Skill</span>
+					</button>
 					<Button type='submit' disabled={isSubmitting}>
 						{isSubmitting ? 'Loading' : 'Next'}
 					</Button>

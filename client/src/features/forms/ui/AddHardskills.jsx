@@ -1,9 +1,11 @@
 import { useEffect } from 'react'
 import { useForm, useFieldArray } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useGetCVQuery, useUpdateCVMutation } from 'shared/api'
 import { Button, IconButton, Icon, Field } from 'shared/ui'
 import styles from 'features/forms/ui/form.module.css'
+import { hardskillsSchema } from '../model/formsSchema'
 
 export const AddHardskills = () => {
 	const { id } = useParams()
@@ -17,9 +19,12 @@ export const AddHardskills = () => {
 		handleSubmit,
 		formState: { errors, isSubmitting },
 		control
-	} = useForm({ defaultValues: { ...hardskills } })
+	} = useForm({
+		resolver: zodResolver(hardskillsSchema),
+		defaultValues: { hardskills: [...hardskills] }
+	})
 
-	const { fields, append, update, remove, swap, move, insert } = useFieldArray({
+	const { fields, append, update, remove} = useFieldArray({
 		control,
 		name: 'hardskills'
 	})
@@ -39,6 +44,10 @@ export const AddHardskills = () => {
 			return err
 		}
 	}
+
+	const onAppend = () => {
+		append({ skill: '' })
+	}
 	return (
 		<div>
 			<h1 className={styles.title}>Hard Skills</h1>
@@ -52,8 +61,7 @@ export const AddHardskills = () => {
 								<Field
 									name={`hardskills.${index}.skill`}
 									defaultValue={hardskills?.[index]?.skill}
-									type='text'
-									errors={errors?.hardskills}
+									error={errors?.hardskills}
 									register={register}
 								/>
 								<IconButton type='button' onClick={() => remove(index)}>
@@ -63,12 +71,12 @@ export const AddHardskills = () => {
 						</fieldset>
 					))}
 
-					{/* <IconButton type='button' onClick={() => append()}>
-					<Plus />
-				</IconButton> */}
-					<Button type='button' onClick={() => append()}>
-						Add Skill
-					</Button>
+					<button type='button' onClick={onAppend} className={styles.plusBtn}>
+						<span>
+							<Icon id='plus' className={styles.plus} />
+						</span>
+						<span>Add Skill</span>
+					</button>
 					<Button type='submit' disabled={isSubmitting}>
 						{isSubmitting ? 'Loading' : 'Next'}
 					</Button>

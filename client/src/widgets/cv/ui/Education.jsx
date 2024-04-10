@@ -7,7 +7,7 @@ import styles from './cv.module.css'
 export const Education = () => {
 	const { id } = useParams()
 
-	const { data, isLoading, isError, error, isFetching } = useGetCVQuery(id)
+	const { data, isLoading, isError, error, isFetching} = useGetCVQuery(id)
 	const { education } = data?.cv || {}
 
 	return (
@@ -16,7 +16,7 @@ export const Education = () => {
 				<EducationIntro />
 				{(isLoading || isFetching) && <p>Loading...</p>}
 				{isError && <p className={styles.error}>{error.data?.message}</p>}
-				<AddEducation id={id} education={education} data={data} />
+				<AddEducation id={id} education={education}  />
 			</section>
 		</div>
 	)

@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useFieldArray, useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useUpdateCVMutation } from 'shared/api'
 import { Button, IconButton, Icon, Field, Text } from 'shared/ui'
 import styles from 'features/forms/ui/form.module.css'
+import { workSchema } from '../model/formsSchema'
 
-export const AddWork = ({ id, work, data }) => {
+export const AddWork = ({ id, work }) => {
 	const [activeIndex, setActiveIndex] = useState()
 	const navigate = useNavigate()
 	const [updateCV] = useUpdateCVMutation()
@@ -16,15 +18,9 @@ export const AddWork = ({ id, work, data }) => {
 		control,
 		watch,
 		formState: { errors, isSubmitting }
-	} = useForm({ defaultValues: { ...work } })
+	} = useForm({ defaultValues: { work: [...work] }, resolver: zodResolver(workSchema) })
 
-	const { fields, append, remove, update } = useFieldArray({ control, name: 'work' })
-
-	useEffect(() => {
-		work?.forEach((field, index) => {
-			Object.keys(field).forEach(key => update(index, field[key]))
-		})
-	}, [work, update])
+	const { fields, append, remove } = useFieldArray({ control, name: 'work' })
 
 	const onNext = async data => {
 		try {
@@ -36,7 +32,17 @@ export const AddWork = ({ id, work, data }) => {
 		}
 	}
 
-
+	const onAppend = () => {
+		setActiveIndex(fields.length)
+		append({
+			start: '',
+			end: '',
+			present: false,
+			company: '',
+			position: '',
+			description: ''
+		})
+	}
 
 	return (
 		<form onSubmit={handleSubmit(onNext)}>
@@ -49,7 +55,7 @@ export const AddWork = ({ id, work, data }) => {
 							isExpanded={activeIndex === index}>
 							<article className={styles.item}>
 								<div className={styles.downBtn}>
-									<IconButton type='button' onClick={() => setActiveIndex()}>
+									<IconButton onClick={() => setActiveIndex()}>
 										<Icon id='chevronUp' className={styles.svg} />
 									</IconButton>
 								</div>
@@ -111,27 +117,30 @@ export const AddWork = ({ id, work, data }) => {
 								/>
 							</article>
 							<div className={styles.trash}>
-								<IconButton type='button' onClick={() => remove(index)}>
+								<IconButton onClick={() => remove(index)}>
 									<Icon className={styles.svg} id='trash' />
 								</IconButton>
 							</div>
 						</fieldset>
 					) : (
-						<div className={styles.fieldset}>
+						<div className={styles.fieldset} key={field?.id}>
 							<article className={styles.collapsed}>
 								<p>
-									{work?.[index]?.position} at {work?.[index]?.company}
+									{fields?.[index]?.position} at {fields?.[index]?.company}
 								</p>
-								<IconButton type='button' onClick={() => setActiveIndex(index)}>
+								<IconButton onClick={() => setActiveIndex(index)}>
 									<Icon id='chevronDown' className={styles.svg} />
 								</IconButton>
 							</article>
 						</div>
 					)
 				)}
-				<Button type='button' onClick={() => append()}>
-					Add
-				</Button>
+				<button type='button' onClick={onAppend} className={styles.plusBtn}>
+					<span>
+						<Icon id='plus' className={styles.plus} />
+					</span>
+					<span>Add</span>
+				</button>
 				<Button type='submit' disabled={isSubmitting}>
 					{isSubmitting ? 'Loading' : 'Next'}
 				</Button>

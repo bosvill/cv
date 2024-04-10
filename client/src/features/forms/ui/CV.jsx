@@ -47,28 +47,7 @@ const { template } = data?.cv || ''
 					<Radio name='template' label='Green' value='green' register={register} />
 					<Radio name='template' label='React' value='react' register={register} />
 				</fieldset>
-				{/* <fieldset className={styles.fieldset}>
-					<legend>Position and short Profile</legend>
-					<Field
-						id='position'
-						name='position'
-						type='text'
-						label='Position'
-						errors={errors?.position}
-						register={register}
-						rules={{
-							required: 'Position is required'
-						}}
-					/>
-					<Text
-						id='profile'
-						name='profile'
-						type='text'
-						label='Profile'
-						errors={errors?.profile}
-						register={register}
-					/>
-				</fieldset> */}
+				
 				<Button type='submit'>New CV</Button>
 			</form>
 		</div>

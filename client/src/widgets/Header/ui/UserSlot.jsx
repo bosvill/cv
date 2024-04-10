@@ -1,13 +1,11 @@
 import { NavLink, useNavigate } from 'react-router-dom'
-import {useSelector} from 'react-redux'
-import { useSendLogoutMutation,selectUser } from 'src/shared/api'
+import { useSendLogoutMutation} from 'src/shared/api'
 import { IconButton, Icon } from 'src/shared/ui'
 import styles from './Header.module.css'
 
 const UserSlot = () => {
-	const id=useSelector(selectUser)
 	const navigate = useNavigate()
-	const [sendLogout, { isLoading, isSuccess, isError, error }] = useSendLogoutMutation()
+	const [sendLogout] = useSendLogoutMutation()
 	const onLogout = () => {
 		sendLogout()
 		navigate('/')

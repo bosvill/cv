@@ -1,4 +1,4 @@
-import React from 'react'
+
 import styles from './Radio.module.css'
 
 export const Radio = ({ name, value, label,register, ...props }) => {

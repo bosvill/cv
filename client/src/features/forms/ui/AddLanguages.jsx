@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useForm, useFieldArray } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useUpdateCVMutation, useGetCVQuery } from 'shared/api'
 import { Button, IconButton, Field, Select, Icon } from 'shared/ui'
 import { levels } from 'shared/consts'
 import styles from 'features/forms/ui/form.module.css'
+import { languagesSchema } from '../model/formsSchema'
 
 export const AddLanguages = () => {
 	const [activeIndex, setActiveIndex] = useState()
@@ -13,36 +15,36 @@ export const AddLanguages = () => {
 	const navigate = useNavigate()
 	const { data, isLoading, isError, error, isFetching } = useGetCVQuery(id)
 	const [updateCV] = useUpdateCVMutation()
-	const languages = data?.cv?.languages || []
-	console.log('languages: ', languages)
+	const languages = data?.cv?.languages || {}
+	console.log('Languages: ', languages)
 
 	const {
 		register,
 		handleSubmit,
 		formState: { errors, isSubmitting },
 		control
-	} = useForm({ defaultValues: { ...languages } })
-
-	const { fields, append, update, remove, swap, move, insert } = useFieldArray({
+	} = useForm({
+		resolver: zodResolver(languagesSchema),
+		defaultValues: { languages: [...languages] }
+	})
+console.log(errors)
+	const { fields, append, remove } = useFieldArray({
 		control,
 		name: 'languages'
 	})
 
-	useEffect(() => {
-		languages.forEach((field, index) => {
-			Object.keys(field).forEach(key => update(index, field[key]))
-		})
-	}, [languages, update])
-
 	const onNext = async data => {
 		try {
 			console.log('Add lang Data: ', data)
-			const res = await updateCV({ id, ...data })
-			console.log(res)
+			await updateCV({ id, data })
 			navigate(`/hardskills/${id}`)
 		} catch (err) {
 			return err
 		}
+	}
+
+	const onAppend = () => {
+		append({ language: '', level: '' })
 	}
 	return (
 		<div>
@@ -52,11 +54,11 @@ export const AddLanguages = () => {
 			<form onSubmit={handleSubmit(onNext)}>
 				<div className={styles.fieldArray}>
 					{fields.map((field, index) =>
-						index === activeIndex ? (
+						index === activeIndex || !!fields ? (
 							<fieldset className={styles.fieldset} key={field.id}>
 								<article className={styles.item}>
 									<div className={styles.downBtn}>
-										<IconButton type='button' onClick={() => setActiveIndex()}>
+										<IconButton onClick={() => setActiveIndex()}>
 											<Icon id='chevronUp' className={styles.svg} />
 										</IconButton>
 									</div>
@@ -65,49 +67,40 @@ export const AddLanguages = () => {
 											autoFocus
 											className={styles.input}
 											name={`languages.${index}.language`}
-											type='text'
 											label='Language'
-											defaultValue={languages?.[index]?.language}
-											/* errors={errors?.languages} */
+											error={errors?.languages?.[index]?.language}
 											register={register}
 										/>
 										<Select
 											name={`languages.${index}.level`}
 											id='levels'
 											label='Level'
-											array={levels}
-											errors={errors?.level}
-											defaultValue={languages?.[index]?.level}
-											/* register={register}
-											rules={{
-												required: 'Level is required'
-											}} */
-											size='5'
+											options={levels}
+											error={errors?.languages?.[index]?.level}
+											register={register}
 										/>
 									</div>
 								</article>
 								<div className={styles.trash}>
-									<IconButton type='button' onClick={() => remove(index)}>
+									<IconButton onClick={() => remove(index)}>
 										<Icon className={styles.svg} id='trash' />
 									</IconButton>
 								</div>
 							</fieldset>
 						) : (
-							<div className={styles.fieldset}>
+							<div className={styles.fieldset} key={field._id}>
 								<article className={styles.collapsed}>
 									<p>
-										{languages?.[index]?.language} {languages?.[index]?.level}
+										{fields?.[index]?.language} {fields?.[index]?.level}
 									</p>
-									<IconButton type='button' onClick={() => setActiveIndex(index)}>
+									<IconButton onClick={() => setActiveIndex(index)}>
 										<Icon id='chevronDown' className={styles.svg} />
 									</IconButton>
 								</article>
 							</div>
 						)
 					)}
-					<Button type='button' onClick={() => append()}>
-						Add
-					</Button>
+					<Button onClick={onAppend}>Add</Button>
 					<Button type='submit' disabled={isSubmitting}>
 						{isSubmitting ? 'Loading' : 'Next'}
 					</Button>

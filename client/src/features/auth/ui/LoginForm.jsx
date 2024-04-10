@@ -1,7 +1,9 @@
 import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from 'react-router-dom'
 import { useLoginMutation } from 'shared/api/auth/authApi'
 import { Button, Field, PasswordField } from 'shared/ui'
+import { loginSchema } from '../model/authSchema'
 import styles from './auth.module.css'
 
 export const LoginForm = () => {
@@ -12,16 +14,13 @@ export const LoginForm = () => {
 		register,
 		handleSubmit,
 		formState: { errors }
-	} = useForm()
+	} = useForm({
+		resolver: zodResolver(loginSchema)
+	})
 
 	const onSubmit = async data => {
 		try {
-			const res = await login(data).unwrap()
-
-			if (!res) {
-				throw new Error('Login failed!')
-			}
-
+			await login(data).unwrap()
 			navigate('/user')
 		} catch (err) {
 			return err
@@ -38,14 +37,9 @@ export const LoginForm = () => {
 						autoFocus
 						id='email'
 						name='email'
-						type='text'
 						label='Email'
-						errors={errors?.email}
+						error={errors?.email}
 						register={register}
-						rules={{
-							required: 'Email is required',
-							pattern: { value: /^\S+@\S+$/i, message: 'Enter a valid email' }
-						}}
 					/>
 				</div>
 				<div className={styles.formItem}>
@@ -53,11 +47,8 @@ export const LoginForm = () => {
 						id='password'
 						name='password'
 						label='Password'
-						errors={errors?.password}
+						error={errors?.password}
 						register={register}
-						rules={{
-							required: 'Password is required'
-						}}
 					/>
 				</div>
 

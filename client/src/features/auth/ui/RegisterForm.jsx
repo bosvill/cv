@@ -1,21 +1,23 @@
 import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+
 import { useSignUpMutation } from 'shared/api/auth/authApi'
 import { Button, PasswordField, Field } from 'shared/ui'
+import { registerSchema } from '../model/authSchema'
 import styles from './auth.module.css'
 
 export const RegisterForm = () => {
 	const navigate = useNavigate()
-	const dispatch = useDispatch()
+
 	const [signUp, { isLoading, error, isError }] = useSignUpMutation()
 
 	const {
 		register,
 		handleSubmit,
-		watch,
+		getValues,
 		formState: { errors }
-	} = useForm()
+	} = useForm({resolver:zodResolver(registerSchema)})
 
 	const onSignup = async data => {
 		try {
@@ -36,27 +38,18 @@ export const RegisterForm = () => {
 						autoFocus
 						id='email'
 						name='email'
-						type='text'
 						label='Email'
-						errors={errors?.email}
+						error={errors?.email}
 						register={register}
-						rules={{
-							required: 'Email is required',
-							pattern: { value: /^\S+@\S+$/i, message: 'Enter a valid email' }
-						}}
 					/>
 				</div>
 				<div className={styles.formItem}>
 					<PasswordField
-						id='password'
-						name='password'
-						label='Password'
-						errors={errors?.password}
+						id='email'
+						name='email'
+						label='Email'
+						error={errors?.email}
 						register={register}
-						rules={{
-							required: 'Password is required',
-							minLength: { value: 8, message: 'Min length 8' }
-						}}
 					/>
 				</div>
 				<div className={styles.formItem}>
@@ -64,15 +57,8 @@ export const RegisterForm = () => {
 						id='confirmPassword'
 						name='confirmPassword'
 						label='Confirm Password'
-						errors={errors?.confirmPassword}
+						error={errors?.confirmPassword}
 						register={register}
-						rules={{
-							required: 'Please confirm your password',
-							pattern: {
-								value: watch('password') !== watch('confirmPassword'),
-								message: 'No match'
-							}
-						}}
 					/>
 				</div>
 				<div className={styles.formItem}>
