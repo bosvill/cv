@@ -1,5 +1,18 @@
 import { z } from 'zod'
 
+const MAX_UPLOAD_SIZE = 1024 * 1024 * 5 // 5MB
+const ACCEPTED_FILE_TYPES = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp']
+
+export const imageSchema = z
+	.instanceof(File)
+	.optional()
+	.refine(file => {
+		return !file || file.size <= MAX_UPLOAD_SIZE
+	}, 'File size must be less than 5MB')
+	.refine(file => {
+		return ACCEPTED_FILE_TYPES.includes(file.type)
+	}, 'Only .jpg, .jpeg, .png and .webp formats are supported')
+
 export const infoSchema = z.object({
 	firstName: z.string().min(1, { message: 'First name is required' }),
 	lastName: z.string().min(1, { message: 'Last name is required' }),
@@ -20,7 +33,11 @@ export const infoSchema = z.object({
 
 export const profileSchema = z.object({
 	position: z.string().min(1, { message: 'Position is required' }),
-	profile: z.string().optional()
+	profile: z.string().optional(),
+	image: z.object({
+		url: z.string().url().or(z.literal('')).optional(),
+		public_id: z.string().optional()
+	})
 })
 
 export const educationSchema = z.object({

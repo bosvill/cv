@@ -2,6 +2,7 @@
 	width: 100%;
 	text-align: center;
 	color: var(--light);
+	background-color: var(--accent);
 	background: no-repeat center/cover url('src/shared/assets/new_file.svg');
 }
 

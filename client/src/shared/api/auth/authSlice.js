@@ -6,7 +6,8 @@ const authSlice = createSlice({
 	reducers: {
 		setCredentials: (state, { payload }) => {
 			//console.log(action.payload)
-			const { accessToken, id } = payload
+			const { accessToken, id,email } = payload
+			state.email=email
 			state.token = accessToken
 			state.id = id
 		},
@@ -16,18 +17,14 @@ const authSlice = createSlice({
 			state.id = null
 		}
 	},
-	// update cvSlice with user id on successful login
-	/* extraReducers: builder => {
-		builder.addMatcher(authApi.endpoints.login.matchFulfilled, (state, { payload }) => {
-			state.cv.user = payload.id
-		})
-	}, */
+	
 	selectors: {
 		selectToken: state => state.accessToken,
-		selectUser: state => state.id
+		selectUser: state => state.id,
+		selectEmail:state=>state.email
 	}
 })
 
 export const { setCredentials, logout } = authSlice.actions
 export default authSlice.reducer
-export const { selectToken, selectUser } = authSlice.selectors
+export const { selectToken, selectUser ,selectEmail} = authSlice.selectors

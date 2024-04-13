@@ -18,7 +18,7 @@ export const Text = ({ id, name, label, register, error, ...props }) => {
 					{...register(name)}
 					//autoComplete='true'
 					{...props}
-					rows={3}></textarea>
+					rows={7}></textarea>
 			</label>
 		</div>
 	)

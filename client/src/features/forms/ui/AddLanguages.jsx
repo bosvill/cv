@@ -27,7 +27,7 @@ export const AddLanguages = () => {
 		resolver: zodResolver(languagesSchema),
 		defaultValues: { languages: [...languages] }
 	})
-console.log(errors)
+	console.log(errors)
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name: 'languages'
@@ -44,6 +44,7 @@ console.log(errors)
 	}
 
 	const onAppend = () => {
+		setActiveIndex(fields.length)
 		append({ language: '', level: '' })
 	}
 	return (
@@ -54,7 +55,7 @@ console.log(errors)
 			<form onSubmit={handleSubmit(onNext)}>
 				<div className={styles.fieldArray}>
 					{fields.map((field, index) =>
-						index === activeIndex || !!fields ? (
+						index === activeIndex ? (
 							<fieldset className={styles.fieldset} key={field.id}>
 								<article className={styles.item}>
 									<div className={styles.downBtn}>
@@ -65,6 +66,7 @@ console.log(errors)
 									<div className={styles.languageItem}>
 										<Field
 											autoFocus
+											id='lang'
 											className={styles.input}
 											name={`languages.${index}.language`}
 											label='Language'
@@ -73,7 +75,7 @@ console.log(errors)
 										/>
 										<Select
 											name={`languages.${index}.level`}
-											id='levels'
+											id='lev'
 											label='Level'
 											options={levels}
 											error={errors?.languages?.[index]?.level}

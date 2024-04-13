@@ -17,7 +17,7 @@ export const RegisterForm = () => {
 		handleSubmit,
 		getValues,
 		formState: { errors }
-	} = useForm({resolver:zodResolver(registerSchema)})
+	} = useForm({ resolver: zodResolver(registerSchema) })
 
 	const onSignup = async data => {
 		try {
@@ -45,16 +45,16 @@ export const RegisterForm = () => {
 				</div>
 				<div className={styles.formItem}>
 					<PasswordField
-						id='email'
-						name='email'
-						label='Email'
-						error={errors?.email}
+						id='pwd'
+						name='password'
+						label='Password'
+						error={errors?.password}
 						register={register}
 					/>
 				</div>
 				<div className={styles.formItem}>
 					<PasswordField
-						id='confirmPassword'
+						id='confirmPwd'
 						name='confirmPassword'
 						label='Confirm Password'
 						error={errors?.confirmPassword}

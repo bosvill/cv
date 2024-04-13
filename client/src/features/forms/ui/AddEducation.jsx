@@ -61,7 +61,7 @@ export const AddEducation = ({ id, education }) => {
 								<div className={styles.dateItem}>
 									<Field
 										autoFocus
-										id='start'
+										id='startDate'
 										name={`education.${index}.start`}
 										type='date'
 										error={errors?.education?.[index]?.start}
@@ -69,7 +69,7 @@ export const AddEducation = ({ id, education }) => {
 										register={register}
 									/>
 									<Field
-										id='end'
+										id='endDate'
 										type='date'
 										name={`education.${index}.end`}
 										label='End date'
@@ -78,28 +78,28 @@ export const AddEducation = ({ id, education }) => {
 										register={register}
 									/>
 									<div className={styles.check}>
-										<input type='checkbox' {...register(`education.${index}.present`)} />
-										<label htmlFor='present' className={styles.label}>
+										<input  id='now' type='checkbox' {...register(`education.${index}.present`)} />
+										<label htmlFor='now' className={styles.label}>
 											Present
 										</label>
 									</div>
 								</div>
 								<Field
-									id='school'
+									id='sch'
 									name={`education.${index}.school`}
 									label='School'
 									error={errors?.education?.[index]?.school}
 									register={register}
 								/>
 								<Field
-									id='subject'
+									id='sbj'
 									name={`education.${index}.subject`}
 									label='Subject'
 									error={errors?.education?.[index]?.subject}
 									register={register}
 								/>
 								<Field
-									id='degree'
+									id='dgr'
 									name={`education.${index}.degree`}
 									label='Degree'
 									error={errors?.education?.[index]?.degree}

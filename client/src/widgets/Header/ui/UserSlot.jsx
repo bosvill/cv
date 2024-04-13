@@ -13,11 +13,17 @@ const UserSlot = () => {
 
 	return (
 		<ul className={styles.nav}>
-			<NavLink to='/cv'> Start CV </NavLink>
-			<NavLink to={`/user`}> Profile</NavLink>
-			<IconButton onClick={onLogout}>
-				<Icon className={styles.svg} id='exit' />
-			</IconButton>
+			<li>
+				<NavLink to='/cv'> Start CV </NavLink>
+			</li>
+			<li>
+				<NavLink to={`/user`}> Profile</NavLink>
+			</li>
+			<li>
+				<IconButton onClick={onLogout}>
+					<Icon className={styles.svg} id='exit' />
+				</IconButton>
+			</li>
 		</ul>
 	)
 }

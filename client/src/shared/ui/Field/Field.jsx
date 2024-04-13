@@ -1,4 +1,3 @@
-
 import styles from './Field.module.css'
 
 export const Field = ({ id, name, label, register, error, ...props }) => {
@@ -18,9 +17,11 @@ export const Field = ({ id, name, label, register, error, ...props }) => {
 					name={name}
 					className={styles.input}
 					aria-label={label}
-					{...register(name)}
-					autoComplete='true'
+					{...(props.type === 'number'
+						? { ...register(name, { valueAsNumber: true }) }
+						: { ...register(name) })}
 					{...props}
+					autoComplete='true'
 				/>
 			</label>
 		</div>

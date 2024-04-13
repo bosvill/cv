@@ -1,17 +1,25 @@
-import { useEffect } from 'react'
+import { useEffect,useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useSelector } from 'react-redux'
-import { useUpdateCVMutation, selectImage } from 'shared/api'
-import { Button, Field, Text } from 'shared/ui'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+	useUpdateCVMutation,
+	useUploadImageMutation,
+	useDeleteImageMutation,
+	resetImage,
+	selectImage
+} from 'shared/api'
+import { Button, Field, IconButton, Text, Icon } from 'shared/ui'
 import UploadImage from 'entities/image/ui/UploadImage'
 import styles from 'features/forms/ui/form.module.css'
-import { profileSchema } from '../model/formsSchema'
+import { profileSchema, imageSchema } from '../model/formsSchema'
+import { AddImage } from './AddImage'
 
-export const AddProfile = ({ id, position, profile, data }) => {
+export const AddProfile = ({ id, position, profile, image }) => {
+	//const [preview,setPreview]=useState()
 	const navigate = useNavigate()
-
+	
 	const [updateCV] = useUpdateCVMutation()
 	const img = useSelector(selectImage)
 
@@ -20,9 +28,9 @@ export const AddProfile = ({ id, position, profile, data }) => {
 		handleSubmit,
 		formState: { errors, isSubmitting },
 		reset,
-		setValue
+		watch
 	} = useForm({
-		resolver:zodResolver(profileSchema),
+		resolver: zodResolver(profileSchema),
 		defaultValues: {
 			position,
 			profile
@@ -32,39 +40,40 @@ export const AddProfile = ({ id, position, profile, data }) => {
 		reset({ position, profile })
 	}, [position, profile, reset])
 
+
 	const onNext = async data => {
 		data.image = img
 		//setValue('image', img)
 		try {
-			console.log(id)
+			console.log('Profile data: ', data)
 			await updateCV({ id, data })
 			navigate(`/info/${id}`)
 		} catch (err) {
 			return err
 		}
 	}
+	
+	
 
 	return (
 		<form className={styles.form} onSubmit={handleSubmit(onNext)}>
+			<AddImage image={image}id={id}/>
 			<fieldset className={styles.fieldset}>
 				<legend className={styles.legend}>Position and short Profile</legend>
 				<Field
 					name='position'
 					type='text'
 					label='Position'
-					errors={errors?.position}
+					error={errors?.position}
 					register={register}
-					rules={{
-						required: 'Position is required'
-					}}
 				/>
-				<UploadImage />
+				{/* <UploadImage /> */}
 
 				<Text
 					name='profile'
 					type='text'
 					label='Profile'
-					errors={errors?.profile}
+					error={errors?.profile}
 					register={register}
 				/>
 			</fieldset>

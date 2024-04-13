@@ -5,13 +5,17 @@ import styles from './Header.module.css'
 const GuestSlot = () => {
 	return (
 		<ul className={styles.nav}>
-			<NavLink to='/login' className={styles.loginLink}>
-				Login
-				<Icon id='enter' className={styles.svg} />
-			</NavLink>
-			<NavLink to='/register' className={styles.loginLink}>
-				Sign Up
-			</NavLink>
+			<li>
+				<NavLink to='/login' className={styles.loginLink}>
+					Login
+					<Icon id='enter' className={styles.svg} />
+				</NavLink>
+			</li>
+			<li>
+				<NavLink to='/register' className={styles.loginLink}>
+					Sign Up
+				</NavLink>
+			</li>
 		</ul>
 	)
 }

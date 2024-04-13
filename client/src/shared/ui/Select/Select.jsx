@@ -5,14 +5,16 @@ export const Select = ({ id, name, defaultValue, register, options, label, ...pr
 	return (
 		<div className={styles.content}>
 			<label htmlFor={id} className={styles.label}>
-				{label}
+				{error ? (
+					<span role='alert' className={styles.error}>
+						{error.message}
+					</span>
+				) : (
+					label
+				)}
 				<select className={styles.select} size='5' id={id} name={name} {...register(name)}>
 					{options?.map(el => (
-						<option
-							key={v4()}
-							value={el}
-							className={styles.option}
-							/* selected={el === defaultValue ? true : false} */>
+						<option key={el} value={el} className={styles.option}>
 							{el}
 						</option>
 					))}

@@ -6,18 +6,15 @@ const imageSlice = createSlice({
 	reducers: {
 		setImage: (state, { payload }) => {
 			console.log(payload)
-			//state.url = payload.url
-			//state.public_id = payload.public_id
 			state.img = payload
-		}
+		},
+		resetImage: state => (state.img = null)
 	},
 	selectors: {
-		//selectImageUrl: state => state.url,
-		//selectImagePublic_id: state => state.public_id
 		selectImage: state => state.img
 	}
 })
 
-export const { setImage } = imageSlice.actions
 export default imageSlice.reducer
-export const { selectImage } = imageSlice.selectors //selectImageUrl, selectImagePublic_id, 
+export const { setImage, resetImage } = imageSlice.actions
+export const { selectImage } = imageSlice.selectors 

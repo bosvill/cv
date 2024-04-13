@@ -1,7 +1,7 @@
 import { createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
 
 import { ErrorBoundary } from 'shared/ui'
-import AppLayout from './AppLayout'
+import AppLayout from './Layout'
 import PrivateOutlet from './PrivateOutlet'
 import UserProfile from 'pages/user'
 import { Login } from 'pages/auth'

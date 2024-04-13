@@ -12,10 +12,11 @@ export {
 	useGetAllQuery,
 	useDeleteCVMutation,
 	useCreateCVMutation,
-	useUpdateCVMutation,
-	useUploadImageMutation
+	useUpdateCVMutation
 } from './cv/cvApi'
 
+export { useUploadImageMutation, useDeleteImageMutation } from './image/imageApi'
+
 export { setCV, selectCV } from './cv/cvSlice'
-export { setImage, selectImage } from './cv/imageSlice'
+export { setImage, resetImage, selectImage } from './image/imageSlice'
 export { setCredentials, logout, selectToken, selectUser } from './auth/authSlice'

@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 
 import authReducer from 'shared/api/auth/authSlice'
-import imageReducer from 'shared/api/cv/imageSlice'
+import imageReducer from 'shared/api/image/imageSlice'
 import cvReducer from 'shared/api/cv/cvSlice'
 import { baseApi } from 'shared/api/base/baseApi'
 
@@ -12,7 +12,7 @@ export const store = configureStore({
 		auth: authReducer,
 		image: imageReducer,
 		cv: cvReducer
-		//education: educationReducer
+	
 	},
 	middleware: getDefaultMiddleware => getDefaultMiddleware().concat(baseApi.middleware)
 })

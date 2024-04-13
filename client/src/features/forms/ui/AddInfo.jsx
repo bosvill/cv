@@ -12,10 +12,12 @@ import {
 import { Button, Field } from 'src/shared/ui'
 import styles from 'src/features/forms/ui/form.module.css'
 import { infoSchema } from '../model/formsSchema'
+import { selectEmail } from 'shared/api/auth/authSlice'
 
 export const AddInfo = () => {
 	const { id } = useParams()
 	const navigate = useNavigate()
+	const mail=useSelector(selectEmail)
 	const { data, isLoading, isSuccess, isError, error } = useGetCVQuery(id)
 
 	const { firstName, lastName, phone, email, street, zip, city, github, linkedIn, homepage } = data?.cv || {}
@@ -34,7 +36,7 @@ export const AddInfo = () => {
 			firstName,
 			lastName,
 			phone,
-			email,
+			email:!email?mail:email,
 			street,
 			zip,
 			city,
@@ -68,14 +70,14 @@ export const AddInfo = () => {
 					<div className={styles.nameItem}>
 						<Field
 							autoFocus
-							id='firstName'
+							id='fname'
 							name='firstName'
 							label='First Name'
 							error={errors?.firstName}
 							register={register}
 						/>
 						<Field
-							id='lastName'
+							id='lName'
 							name='lastName'
 							label='Last Name'
 							error={errors?.lastName}
@@ -87,7 +89,7 @@ export const AddInfo = () => {
 				<fieldset className={styles.fieldset}>
 					<legend className={styles.legend}>Address</legend>
 					<Field
-						id='street'
+						id='str'
 						name='street'
 						label='Street'
 						error={errors?.street}
@@ -95,7 +97,7 @@ export const AddInfo = () => {
 					/>
 					<div className={styles.fitem70}>
 						<Field
-							id='zip'
+							id='z'
 							name='zip'
 							type='number'
 							label='Postal code'
@@ -110,14 +112,14 @@ export const AddInfo = () => {
 					<legend className={styles.legend}>Contact and Links</legend>
 					<div className={styles.contactItem}>
 						<Field
-							id='email'
+							id='mail'
 							name='email'
 							label='Email'
 							error={errors?.email}
 							register={register}
 						/>
 						<Field
-							id='phone'
+							id='tel'
 							name='phone'
 							type='tel'
 							label='Phone'
@@ -125,21 +127,21 @@ export const AddInfo = () => {
 							register={register}
 						/>
 						<Field
-							id='linkedIn'
+							id='linked'
 							name='linkedIn'
 							label='LinkedIn'
 							error={errors?.linkedIn}
 							register={register}
 						/>
 						<Field
-							id='github'
+							id='git'
 							name='github'
 							label='Github'
 							error={errors?.github}
 							register={register}
 						/>
 						<Field
-							id='homepage'
+							id='page'
 							name='homepage'
 							type='url'
 							label='Homepage'

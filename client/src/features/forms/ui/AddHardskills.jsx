@@ -24,7 +24,7 @@ export const AddHardskills = () => {
 		defaultValues: { hardskills: [...hardskills] }
 	})
 
-	const { fields, append, update, remove} = useFieldArray({
+	const { fields, append, update, remove } = useFieldArray({
 		control,
 		name: 'hardskills'
 	})
@@ -59,6 +59,7 @@ export const AddHardskills = () => {
 						<fieldset className={styles.fieldset} key={field.id}>
 							<article className={styles.skillItem}>
 								<Field
+									id='hard'
 									name={`hardskills.${index}.skill`}
 									defaultValue={hardskills?.[index]?.skill}
 									error={errors?.hardskills}

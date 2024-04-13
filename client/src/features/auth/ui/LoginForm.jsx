@@ -35,7 +35,7 @@ export const LoginForm = () => {
 				<div className={styles.formItem}>
 					<Field
 						autoFocus
-						id='email'
+						id='mail'
 						name='email'
 						label='Email'
 						error={errors?.email}
@@ -44,7 +44,7 @@ export const LoginForm = () => {
 				</div>
 				<div className={styles.formItem}>
 					<PasswordField
-						id='password'
+						id='pwd'
 						name='password'
 						label='Password'
 						error={errors?.password}

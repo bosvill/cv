@@ -9,4 +9,5 @@ export { Select } from './Select/Select.jsx'
 export { Text } from './Text/Text.jsx'
 export {Fallback} from './Fallback/Fallback.jsx'
 export {ErrorBoundary} from './Error/ErrorBoundary.jsx'
+export {ImageField} from './ImageUploader/ImageField.jsx'
 

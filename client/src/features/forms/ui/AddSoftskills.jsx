@@ -55,6 +55,7 @@ export const AddSoftskills = () => {
 						<fieldset className={styles.fieldset} key={field.id}>
 							<article className={styles.skillItem}>
 								<Field
+									id='soft'
 									autoFocus
 									className={styles.input}
 									name={`softskills.${index}.skill`}

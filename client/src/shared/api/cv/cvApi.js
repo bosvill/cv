@@ -1,6 +1,4 @@
-import { baseApi } from 'shared/api'
-import { setImage } from 'shared/api'
-import { setCV } from 'shared/api'
+import { baseApi, setCV, setImage } from 'shared/api'
 
 const cvApi = baseApi.injectEndpoints({
 	endpoints: builder => ({
@@ -10,16 +8,20 @@ const cvApi = baseApi.injectEndpoints({
 				method: 'POST',
 				body: data
 			}),
-			async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+			/*
+			async onQueryStarted({ data }, { dispatch, queryFulfilled }) {
 				try {
-					const cvData = await queryFulfilled
+
+					 const cvData = await queryFulfilled
+
 					cvData.data.success
 						? dispatch(setCV({ id: cvData.data.created._id, user: cvData.data.created.user }))
 						: console.log('cv Data from query: ', cvData)
-				} catch (err) {
-					return err
-				}
-			},
+					} catch (err) {
+						return err
+					}
+				},
+				*/
 			invalidatesTags: ['CV']
 		}),
 
@@ -31,6 +33,12 @@ const cvApi = baseApi.injectEndpoints({
 					try {
 						const cvData = await queryFulfilled
 						console.log('cv Data from query: ', cvData)
+						dispatch(
+							setImage({
+								url: imageData.data.image.path,
+								public_id: imageData.data.image.originalname
+							})
+						)
 						//dispatch(setCV(cvData.data.cv))
 					} catch (err) {
 						return err
@@ -60,30 +68,6 @@ const cvApi = baseApi.injectEndpoints({
 				body: data
 			}),
 			invalidatesTags: ['CV']
-		}),
-
-		uploadImage: builder.mutation({
-			query: data => ({
-				url: 'cv/upload',
-				method: 'POST',
-				body: data
-			}),
-			async onQueryStarted(_, { dispatch, queryFulfilled }) {
-				try {
-					const imageData = await queryFulfilled
-					imageData.data.success
-						? dispatch(
-								setImage({
-									url: imageData.data.image.path,
-									public_id: imageData.data.image.originalname
-								})
-						  )
-						: console.log(imageData)
-				} catch (err) {
-					return err
-				}
-			},
-			invalidatesTags: ['Image']
 		})
 	})
 })
@@ -93,6 +77,5 @@ export const {
 	useGetAllQuery,
 	useDeleteCVMutation,
 	useCreateCVMutation,
-	useUpdateCVMutation,
-	useUploadImageMutation
+	useUpdateCVMutation
 } = cvApi

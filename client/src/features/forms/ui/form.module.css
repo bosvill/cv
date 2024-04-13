@@ -159,8 +159,8 @@
 }
 
 .svg {
-	width: var(--fontSize-0);
-	height: var(--fontSize-0);
+	width: var(--fontSize-1);
+	height: var(--fontSize-1);
 	padding: 0;
 	margin: 0;
 	border: none;
@@ -221,3 +221,48 @@
 	}
 
 }
+
+.imgFieldset{
+	composes: fieldset;
+	width: max-content;
+}
+.imgItem{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: var(--space-m);
+
+}
+/* .trashImg{
+	
+
+} */
+.imgLabel{
+	color: var(--light-1);
+	font-weight: 500;
+	font-size: var(--fontSize-0); 
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-xs);
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+.img{
+	width: 5.5rem;
+	height: 6rem;
+	box-shadow: 0.05rem 0.1rem 0.1rem 0.05rem var(--shadow);
+
+}
+.person{
+	composes:img;
+	stroke: var(--light-1);
+	fill: none;
+}
+
+.loading{
+	color: var(--accent-2);
+}
+
+

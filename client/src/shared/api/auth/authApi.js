@@ -32,6 +32,7 @@ export const authApi = baseApi.injectEndpoints({
 					const { data } = await queryFulfilled
 					if (Object.keys(data).length > 0) {
 						//localStorage.setItem('persist', data.persist)
+						console.log('Data: ',data)
 						dispatch(setCredentials(data))
 					}
 				} catch (error) {

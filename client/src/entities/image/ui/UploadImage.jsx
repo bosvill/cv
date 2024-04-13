@@ -9,22 +9,34 @@ const UploadImage = () => {
 	const {
 		register,
 		formState: { errors, isSubmitting }
-	} = useForm({ resolver: zodResolver(imageSchema) })
+	} = useForm({ mode: 'onChange' }) //, resolver: zodResolver(imageSchema)
+	const handleImageChange = async event => {
+		try {
+			const formData = new FormData()
+			formData.append('image', event.target.files[0])
+			console.log(formData)
+			await uploadImage(formData).unwrap()
+		} catch (err) {
+			return err
+		}
+	}
+	console.log(errors)
 	return (
-		<Field
-			id='image'
-			name='image'
-			type='file'
-			label='Profile image'
-			error={errors?.image}
-			register={register}
-			onChange={event => {
-				const formData = new FormData()
-				formData.append('image', event.target.files[0])
-				console.log(formData)
-				uploadImage(formData).unwrap()
-			}}
-		/>
+		<div>
+			{isSubmitting||isLoading ? <p>Uploading image..</p> : null}
+			<Field
+				id='image'
+				type='file'
+				name='image'
+				label='Profile image'
+				error={errors?.img || error?.data}
+				register={register}
+				onChange={handleImageChange}
+			/>
+			<button type='button' onClick={() => console.log('Invalid: ', errors)}>
+				check invalid
+			</button>
+		</div>
 	)
 }
 

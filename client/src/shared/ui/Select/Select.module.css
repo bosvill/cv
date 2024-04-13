@@ -33,9 +33,8 @@
 }
 
 .option {
-	appearance: none;
 
-	height: 2.5rem;
+	height: 2rem;
 	padding: 0.3rem;
 	border-bottom: 0.1em solid var(--accent-2);
 	cursor: pointer;

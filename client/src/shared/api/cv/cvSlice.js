@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
+/* const initialState = {
 	cv: {
 		user: null,
+		template:null,
 		image: { url: null, name: null },
 		firstName: null,
 		lastName: null,
@@ -24,10 +25,10 @@ const initialState = {
 		education: [],
 		work: []
 	}
-}
+} */
 const cvSlice = createSlice({
 	name: 'cv',
-	initialState,
+	initialState:{},
 	reducers: {
 		setCV: (state, { payload }) => {
 			console.log(payload)
