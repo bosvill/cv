@@ -69,12 +69,7 @@ export const AddSoftskills = () => {
 							</article>
 						</fieldset>
 					))}
-					<button type='button' onClick={onAppend} className={styles.plusBtn}>
-						<span>
-							<Icon id='plus' className={styles.plus} />
-						</span>
-						<span>Add Skill</span>
-					</button>
+					<Button onClick={onAppend}>Add</Button>
 					<Button type='submit' disabled={isSubmitting}>
 						{isSubmitting ? 'Loading' : 'Next'}
 					</Button>

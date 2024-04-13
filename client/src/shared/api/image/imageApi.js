@@ -4,15 +4,15 @@ import { setImage } from 'shared/api'
 export const imageApi = baseApi.injectEndpoints({
 	endpoints: builder => ({
 		uploadImage: builder.mutation({
-			query: data => ({
-				url: 'img/upload',
+			query: ({ id, image }) => ({
+				url: `img/${id}/upload`,
 				method: 'POST',
-				body: data
+				body: image
 			}),
-			async onQueryStarted(_, { dispatch, queryFulfilled }) {
+			/* 	async onQueryStarted(_, { dispatch, queryFulfilled }) {
 				try {
 					const imageData = await queryFulfilled
-                    console.log(imageData)
+					console.log(imageData)
 					imageData.data.success
 						? dispatch(
 								setImage({
@@ -24,15 +24,16 @@ export const imageApi = baseApi.injectEndpoints({
 				} catch (err) {
 					return err
 				}
-			},
+			}, */
 			invalidatesTags: ['CV']
 		}),
 		deleteImage: builder.mutation({
-			query: public_id => ({
-				url: `img/delete/${public_id}`,
-				method: 'DELETE'
+			query: ({ id, public_id }) => ({
+				url: `img/${id}/destroy`,
+				method: 'POST',
+				body: public_id
 			}),
-			async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+			/* async onQueryStarted(arg, { dispatch, queryFulfilled }) {
 				console.log(arg)
 				try {
                     const imageData = await queryFulfilled
@@ -49,7 +50,7 @@ export const imageApi = baseApi.injectEndpoints({
 				} catch (err) {
 					return err
 				}
-			},
+			}, */
 			invalidatesTags: ['CV']
 		})
 	})

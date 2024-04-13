@@ -3,12 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useSelector } from 'react-redux'
-import {
-	useUploadImageMutation,
-	useUpdateCVMutation,
-	useGetCVQuery,
-	selectImage
-} from 'src/shared/api'
+import { useUpdateCVMutation, useGetCVQuery } from 'src/shared/api'
 import { Button, Field } from 'src/shared/ui'
 import styles from 'src/features/forms/ui/form.module.css'
 import { infoSchema } from '../model/formsSchema'
@@ -16,14 +11,13 @@ import { selectEmail } from 'shared/api/auth/authSlice'
 
 export const AddInfo = () => {
 	const { id } = useParams()
-	const navigate = useNavigate()
-	const mail=useSelector(selectEmail)
+	const mail = useSelector(selectEmail)
 	const { data, isLoading, isSuccess, isError, error } = useGetCVQuery(id)
-
-	const { firstName, lastName, phone, email, street, zip, city, github, linkedIn, homepage } = data?.cv || {}
-
 	const [updateCV, { isLoading: isUpdating, isError: isUpdateError, error: updateError }] =
 		useUpdateCVMutation()
+	const navigate = useNavigate()
+	const { firstName, lastName, phone, email, street, zip, city, github, linkedIn, homepage } =
+		data?.cv || {}
 
 	const {
 		register,
@@ -36,7 +30,7 @@ export const AddInfo = () => {
 			firstName,
 			lastName,
 			phone,
-			email:!email?mail:email,
+			email: !email ? mail : email,
 			street,
 			zip,
 			city,
@@ -46,10 +40,10 @@ export const AddInfo = () => {
 		}
 	})
 
-	useEffect(() => {
+	/* useEffect(() => {
 		reset()
 	}, [reset, isSuccess])
-
+ */
 	const onNext = async data => {
 		try {
 			await updateCV({ id, data })
@@ -88,13 +82,7 @@ export const AddInfo = () => {
 
 				<fieldset className={styles.fieldset}>
 					<legend className={styles.legend}>Address</legend>
-					<Field
-						id='str'
-						name='street'
-						label='Street'
-						error={errors?.street}
-						register={register}
-					/>
+					<Field id='str' name='street' label='Street' error={errors?.street} register={register} />
 					<div className={styles.fitem70}>
 						<Field
 							id='z'
@@ -111,13 +99,7 @@ export const AddInfo = () => {
 				<fieldset className={styles.fieldset}>
 					<legend className={styles.legend}>Contact and Links</legend>
 					<div className={styles.contactItem}>
-						<Field
-							id='mail'
-							name='email'
-							label='Email'
-							error={errors?.email}
-							register={register}
-						/>
+						<Field id='mail' name='email' label='Email' error={errors?.email} register={register} />
 						<Field
 							id='tel'
 							name='phone'

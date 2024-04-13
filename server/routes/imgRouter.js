@@ -1,14 +1,13 @@
 import { Router } from 'express'
-import auth from '../middlewares/authHandler.js'
 
-import { uploadImage, deleteImage } from '../controllers/imageController.js'
-import imgUploadMiddleware from '../middlewares/imgUploadMiddleware.js'
-import { remove } from '../services/imageService.js'
+import { deleteImage, uploadImage } from '../controllers/imageController.js'
+import { imgUploadMiddleware } from '../middlewares/imgUploadMiddleware.js'
 
 const imgRouter = Router()
 const upload = imgUploadMiddleware('cv')
 
-imgRouter.route('/upload').post(upload.single('image'), uploadImage)
-imgRouter.route('/delete/:id').delete(remove,deleteImage)
+
+imgRouter.route('/:id/upload').post(upload.single('image'), uploadImage)
+imgRouter.route('/:id/destroy').post( deleteImage)
 
 export default imgRouter

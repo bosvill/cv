@@ -1,7 +1,7 @@
 import { v4 } from 'uuid'
 import styles from './Select.module.css'
 
-export const Select = ({ id, name, defaultValue, register, options, label, ...props }) => {
+export const Select = ({ id, name, defaultValue, register, options, label,error, ...props }) => {
 	return (
 		<div className={styles.content}>
 			<label htmlFor={id} className={styles.label}>

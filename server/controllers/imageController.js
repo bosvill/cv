@@ -1,34 +1,52 @@
+import { cloudinary } from '../config/cloudinary.js'
+import CV from '../models/CV.js'
 import ApiError from '../utils/ApiError.js'
 import wrapAsync from '../utils/wrapAsync.js'
-import { removePhoto } from '../services/imageService.js'
 
+// api/img/:id/upload
 const uploadImage = wrapAsync(async (req, res, next) => {
-	const image = req.file
-	if (!image) {
-		// No file was uploaded
-		return next(new ApiError(400, 'No file uploaded!'))
-		/*  return res.status(400).json({ error: "No file uploaded" }); */
+	const { id } = req.params
+	if (!id) {
+		return next(ApiError.BadRequest('Try again'))
 	}
 
-	// File upload successful
-	//const fileUrl = req.file.path // URL of the uploaded file in Cloudinary
+	if (!req.file) {
+		// No file was uploaded
+		return next(new ApiError(400, 'No file uploaded!'))
+	}
 
-	// Perform any additional logic or save the file URL to a database
-	//await CV.findOne()
-	console.log(image)
-	res.status(201).json({ success: true, message: 'Image uploaded!', image })
+	console.log(req.file)
+	// File upload successful
+	const { filename: public_id, path: url } = req.file
+
+	// Save the file to a database
+	const cv = await CV.findByIdAndUpdate(id, { $set: { image: { url, public_id } } }, { new: true })
+
+	return res.status(201).json({ success: true, message: 'Image uploaded!', cv })
 })
 
-/* delete an image */
-const deleteImage = wrapAsync(async (req, res, next) => {
-	const {public_id}=req.params
-	console.log(public_id)
-	await removePhoto(public_id)
-	//const result = req.file
-	//console.log('deleteImg: ',result)
+// api/img/:id/destroy
 
-	res.status(202).json({
-		message: 'Image deleted'
+const deleteImage = wrapAsync(async (req, res, next) => {
+	const { id } = req.params
+	const  public_id  = req.body
+	const result = await cloudinary.uploader.destroy(public_id, (result, error) => {
+		//,'Image deleted'
+		console.log(result)
+		if (error) {
+			return next(new ApiError(error.status, error.message))
+		}
+	})
+	console.log(result)
+	// Delete file from a database
+	const cv = await CV.findByIdAndUpdate(
+		id,
+		{ $set: { image:null } }, // { url: '', public_id: '' }
+		{ new: true }
+	)
+	return res.status(202).json({
+		message: 'Image deleted',
+		cv
 	})
 })
 

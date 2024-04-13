@@ -9,14 +9,13 @@ import styles from 'features/forms/ui/form.module.css'
 import { languagesSchema } from '../model/formsSchema'
 
 export const AddLanguages = () => {
-	const [activeIndex, setActiveIndex] = useState()
 	const { id } = useParams()
-
+	const [activeIndex, setActiveIndex] = useState()
 	const navigate = useNavigate()
 	const { data, isLoading, isError, error, isFetching } = useGetCVQuery(id)
 	const [updateCV] = useUpdateCVMutation()
+
 	const languages = data?.cv?.languages || {}
-	console.log('Languages: ', languages)
 
 	const {
 		register,

@@ -8,20 +8,6 @@ const cvApi = baseApi.injectEndpoints({
 				method: 'POST',
 				body: data
 			}),
-			/*
-			async onQueryStarted({ data }, { dispatch, queryFulfilled }) {
-				try {
-
-					 const cvData = await queryFulfilled
-
-					cvData.data.success
-						? dispatch(setCV({ id: cvData.data.created._id, user: cvData.data.created.user }))
-						: console.log('cv Data from query: ', cvData)
-					} catch (err) {
-						return err
-					}
-				},
-				*/
 			invalidatesTags: ['CV']
 		}),
 
@@ -39,7 +25,6 @@ const cvApi = baseApi.injectEndpoints({
 								public_id: imageData.data.image.originalname
 							})
 						)
-						//dispatch(setCV(cvData.data.cv))
 					} catch (err) {
 						return err
 					}

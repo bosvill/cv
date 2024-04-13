@@ -33,13 +33,13 @@ export const infoSchema = z.object({
 
 export const profileSchema = z.object({
 	position: z.string().min(1, { message: 'Position is required' }),
-	profile: z.string().optional(),
+	profile: z.string().optional()
+})
+/* ,
 	image: z.object({
 		url: z.string().url().or(z.literal('')).optional(),
 		public_id: z.string().optional()
-	})
-})
-
+	}) */
 export const educationSchema = z.object({
 	education: z.array(
 		z.object({

@@ -6,15 +6,15 @@ const imageSlice = createSlice({
 	reducers: {
 		setImage: (state, { payload }) => {
 			console.log(payload)
-			state.img = payload
+			state.image = payload
 		},
-		resetImage: state => (state.img = null)
+		resetImage: state => (state.image = null)
 	},
 	selectors: {
-		selectImage: state => state.img
+		selectImage: state => state.image
 	}
 })
 
 export default imageSlice.reducer
 export const { setImage, resetImage } = imageSlice.actions
-export const { selectImage } = imageSlice.selectors 
+export const { selectImage } = imageSlice.selectors
