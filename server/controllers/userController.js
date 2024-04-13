@@ -30,6 +30,7 @@ const register = wrapAsync(async (req, res, next) => {
 	return res.status(201).json({
 		accessToken: userData.accessToken,
 		id: userData._id,
+		email:userData.email,
 		message: 'Registration successful!'
 	})
 })
@@ -47,6 +48,7 @@ const login = wrapAsync(async (req, res, next) => {
 	return res.status(200).json({
 		accessToken: userData.accessToken,
 		id: userData._id,
+		email:userData.email,
 		message: 'Login successful!'
 	})
 })

@@ -6,6 +6,7 @@ import errorHandler from './middlewares/errorHandler.js'
 import ApiError from './utils/ApiError.js'
 import userRouter from './routes/userRouter.js'
 import cvRouter from './routes/cvRouter.js'
+import imgRouter from './routes/imgRouter.js'
 import { corsOptions } from './config/corsOptions.js'
 
 //DB connection
@@ -21,6 +22,7 @@ app.use(cors(corsOptions))
 
 app.use('/api/user', userRouter)
 app.use('/api/cv', cvRouter)
+app.use('/api/img', imgRouter)
 
 /* app.get('/', (req, res, next) => {
 	throw ApiError.UnauthorizedError('Test errror')

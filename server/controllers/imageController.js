@@ -1,6 +1,6 @@
 import ApiError from '../utils/ApiError.js'
 import wrapAsync from '../utils/wrapAsync.js'
-import CV from '../models/CV.js'
+import { removePhoto } from '../services/imageService.js'
 
 const uploadImage = wrapAsync(async (req, res, next) => {
 	const image = req.file
@@ -19,15 +19,17 @@ const uploadImage = wrapAsync(async (req, res, next) => {
 	res.status(201).json({ success: true, message: 'Image uploaded!', image })
 })
 
-/* update an image */
-const updateImage = wrapAsync(async (req, res, next) => {
-	await removePhoto(req.query.public_id)
-	const result = req.file
+/* delete an image */
+const deleteImage = wrapAsync(async (req, res, next) => {
+	const {public_id}=req.params
+	console.log(public_id)
+	await removePhoto(public_id)
+	//const result = req.file
+	//console.log('deleteImg: ',result)
 
 	res.status(202).json({
-		description: 'Image updated successfully',
-		result
+		message: 'Image deleted'
 	})
 })
 
-export { updateImage, uploadImage }
+export { deleteImage, uploadImage }

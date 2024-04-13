@@ -1,8 +1,7 @@
-import multer from 'multer'
-import path from 'path'
 import { v2 as cloudinary } from 'cloudinary'
-//import cloudinary from '../config/cloudinary.js'
+import multer from 'multer'
 import { CloudinaryStorage } from 'multer-storage-cloudinary'
+import ApiError from '../utils/ApiError.js'
 
 cloudinary.config({
 	cloud_name: process.env.CLOUD_NAME,
@@ -10,11 +9,12 @@ cloudinary.config({
 	api_secret: process.env.API_SECRET
 })
 
-
-const uploadMiddleware = folderName => {
+const imgUploadMiddleware = folderName => {
 	const storage = new CloudinaryStorage({
 		cloudinary: cloudinary,
 		params: (req, file) => {
+			//console.log('upload MW req:', req)
+			//console.log('upload MW file:', file)
 			const folderPath = `${folderName.trim()}` // Update the folder path here
 			//const fileExtension = path.extname(file.originalname).substring(1)
 			const publicId = `${file.fieldname}-${Date.now()}`
@@ -30,8 +30,20 @@ const uploadMiddleware = folderName => {
 		storage: storage,
 		limits: {
 			fileSize: 5 * 1024 * 1024 // keep images size < 5 MB
+		},
+		fileFilter: (req, file, cb) => {
+			if (
+				file.mimetype == 'image/png' ||
+				file.mimetype == 'image/jpg' ||
+				file.mimetype == 'image/jpeg' ||
+				file.mimetype == 'image/webp'
+			) {
+				cb(null, true)
+			} else {
+				return cb(ApiError.ValidationError('Invalid mime type'))
+			}
 		}
 	})
 }
 
-export default uploadMiddleware
+export default imgUploadMiddleware
