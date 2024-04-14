@@ -1,4 +1,4 @@
-export {CV} from './ui/CV'
+export {CreateCV} from './ui/CreateCV'
 export {AddEducation} from './ui/AddEducation'
 export {AddHardskills} from './ui/AddHardskills'
 export {AddInfo} from './ui/AddInfo'

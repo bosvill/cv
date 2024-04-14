@@ -5,17 +5,17 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useUpdateCVMutation, useGetCVQuery } from 'shared/api'
 import { Button, IconButton, Field, Select, Icon } from 'shared/ui'
 import { levels } from 'shared/consts'
-import styles from 'features/forms/ui/form.module.css'
 import { languagesSchema } from '../model/formsSchema'
+import styles from 'features/forms/ui/form.module.css'
 
 export const AddLanguages = () => {
-	const { id } = useParams()
 	const [activeIndex, setActiveIndex] = useState()
-	const navigate = useNavigate()
+	const { id } = useParams()
 	const { data, isLoading, isError, error, isFetching } = useGetCVQuery(id)
 	const [updateCV] = useUpdateCVMutation()
+	const navigate = useNavigate()
 
-	const languages = data?.cv?.languages || {}
+	const languages = data?.cv?.languages || []
 
 	const {
 		register,
@@ -26,15 +26,14 @@ export const AddLanguages = () => {
 		resolver: zodResolver(languagesSchema),
 		defaultValues: { languages: [...languages] }
 	})
-	console.log(errors)
+
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name: 'languages'
 	})
 
-	const onNext = async data => {
+	const onSubmit = async data => {
 		try {
-			console.log('Add lang Data: ', data)
 			await updateCV({ id, data })
 			navigate(`/hardskills/${id}`)
 		} catch (err) {
@@ -51,7 +50,7 @@ export const AddLanguages = () => {
 			<h1 className={styles.title}>Languages</h1>
 			{(isLoading || isFetching) && <p>Loading...</p>}
 			{isError && <p className={styles.error}>{error.data?.message}</p>}
-			<form onSubmit={handleSubmit(onNext)}>
+			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className={styles.fieldArray}>
 					{fields.map((field, index) =>
 						index === activeIndex ? (
@@ -66,7 +65,6 @@ export const AddLanguages = () => {
 										<Field
 											autoFocus
 											id='lang'
-											className={styles.input}
 											name={`languages.${index}.language`}
 											label='Language'
 											error={errors?.languages?.[index]?.language}

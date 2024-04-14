@@ -3,11 +3,10 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useSelector } from 'react-redux'
-import { useUpdateCVMutation, useGetCVQuery } from 'src/shared/api'
-import { Button, Field } from 'src/shared/ui'
-import styles from 'src/features/forms/ui/form.module.css'
+import { useUpdateCVMutation, useGetCVQuery, selectEmail } from 'shared/api'
+import { Button, Field } from 'shared/ui'
 import { infoSchema } from '../model/formsSchema'
-import { selectEmail } from 'shared/api/auth/authSlice'
+import styles from 'src/features/forms/ui/form.module.css'
 
 export const AddInfo = () => {
 	const { id } = useParams()
@@ -16,6 +15,7 @@ export const AddInfo = () => {
 	const [updateCV, { isLoading: isUpdating, isError: isUpdateError, error: updateError }] =
 		useUpdateCVMutation()
 	const navigate = useNavigate()
+
 	const { firstName, lastName, phone, email, street, zip, city, github, linkedIn, homepage } =
 		data?.cv || {}
 
@@ -40,11 +40,11 @@ export const AddInfo = () => {
 		}
 	})
 
-	/* useEffect(() => {
+	useEffect(() => {
 		reset()
 	}, [reset, isSuccess])
- */
-	const onNext = async data => {
+
+	const onSubmit = async data => {
 		try {
 			await updateCV({ id, data })
 			navigate(`/education/${id}`)
@@ -56,9 +56,9 @@ export const AddInfo = () => {
 	return (
 		<section className={styles.section}>
 			<h1 className={styles.title}>Add personal information</h1>
-			{isError || (isUpdateError && <p className={styles.error}>{error.data?.message}</p>)}
+			{(isError || isUpdateError) && <p className={styles.error}>{error.data?.message}</p>}
 			{(isLoading || isUpdating) && <p>Loading...</p>}
-			<form className={styles.form} onSubmit={handleSubmit(onNext)}>
+			<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 				<fieldset className={styles.fieldset}>
 					<legend className={styles.legend}>Full name</legend>
 					<div className={styles.nameItem}>
@@ -83,7 +83,7 @@ export const AddInfo = () => {
 				<fieldset className={styles.fieldset}>
 					<legend className={styles.legend}>Address</legend>
 					<Field id='str' name='street' label='Street' error={errors?.street} register={register} />
-					<div className={styles.fitem70}>
+					<div className={styles.addressItem}>
 						<Field
 							id='z'
 							name='zip'

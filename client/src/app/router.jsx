@@ -14,7 +14,7 @@ import { Profile } from 'widgets/cv'
 import { Work } from 'widgets/cv'
 import { PreviewReact } from 'widgets/previewReact'
 
-import { CV } from 'features/forms'
+import { CreateCV } from 'features/forms'
 
 import { AddHardskills, AddInfo, AddLanguages, AddSoftskills } from 'features/forms'
 
@@ -27,7 +27,7 @@ const router = createBrowserRouter(
 
 			<Route element={<PrivateOutlet />}>
 				<Route path='user' element={<UserProfile />} />
-				<Route path='cv' element={<CV />} />
+				<Route path='cv' element={<CreateCV />} />
 				<Route path='profile/:id' element={<Profile />} />
 				<Route path='info/:id' element={<AddInfo />} />
 				<Route path='education/:id' element={<Education />} />

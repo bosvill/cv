@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -9,18 +9,18 @@ import {
 	useDeleteImageMutation
 } from 'shared/api'
 import { Button, Field, IconButton, Text, Icon } from 'shared/ui'
-import styles from 'features/forms/ui/form.module.css'
 import { profileSchema, imageSchema } from '../model/formsSchema'
+import styles from 'features/forms/ui/form.module.css'
 
 export const AddProfile = ({ id }) => {
-	const navigate = useNavigate()
 	const { data, isLoading, isError, error, isFetching } = useGetCVQuery(id)
-	const { position, profile, image } = data?.cv || {}
 	const [uploadImage, { isLoading: isUploading, isError: isUploadError, error: uploadError }] =
-		useUploadImageMutation()
+	useUploadImageMutation()
 	const [deleteImage, { error: delError, isError: isDelError }] = useDeleteImageMutation()
 	const [updateCV] = useUpdateCVMutation()
-
+	const navigate = useNavigate()
+	
+	const { position, profile, image } = data?.cv || {}
 	const {
 		register,
 		handleSubmit,
@@ -40,9 +40,8 @@ export const AddProfile = ({ id }) => {
 		reset({ position, profile, image })
 	}, [position, profile, image, reset])
 
-	const onNext = async data => {
+	const onSubmit = async data => {
 		try {
-			console.log('Profile data: ', data)
 			await updateCV({ id, data })
 			navigate(`/info/${id}`)
 		} catch (err) {
@@ -60,10 +59,9 @@ export const AddProfile = ({ id }) => {
 		}
 	}
 
-	const onImgDelete = async () => {
+	const onDelete = async () => {
 		try {
-			const res = await deleteImage({ id, public_id: image.public_id }).unwrap()
-			console.log(res)
+			await deleteImage({ id, public_id: image.public_id }).unwrap()
 			setValue('image.url', '')
 			setValue('image.public_id', '')
 			if (isDelError) {
@@ -77,8 +75,8 @@ export const AddProfile = ({ id }) => {
 	return (
 		<>
 			{isError && <p className={styles.error}>{error.data?.message}</p>}
-			{isLoading || (isFetching && <p>Loading...</p>)}
-			<form className={styles.form} onSubmit={handleSubmit(onNext)}>
+			{(isLoading || isFetching) && <p>Loading...</p>}
+			<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 				<fieldset className={styles.imgFieldset}>
 					<legend className={styles.legend}>Profile Image</legend>
 					<div className={styles.imgItem}>
@@ -109,7 +107,7 @@ export const AddProfile = ({ id }) => {
 						{image?.url?.length > 0 ? (
 							<div className={styles.trashImg}>
 								<IconButton type='button'>
-									<Icon id='trash' className={styles.svg} onClick={onImgDelete} />
+									<Icon id='trash' className={styles.svg} onClick={onDelete} />
 								</IconButton>
 							</div>
 						) : null}

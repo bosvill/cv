@@ -1,18 +1,18 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useForm, useFieldArray } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useNavigate } from 'react-router-dom'
 import { useUpdateCVMutation, useGetCVQuery } from 'shared/api'
 import { Button, IconButton, Icon, Field } from 'shared/ui'
-import styles from 'features/forms/ui/form.module.css'
 import { educationSchema } from '../model/formsSchema'
+import styles from 'features/forms/ui/form.module.css'
 
 export const AddEducation = ({ id }) => {
 	const [activeIndex, setActiveIndex] = useState()
 	const { data, isLoading, isError, error, isFetching } = useGetCVQuery(id)
 	const navigate = useNavigate()
 	const [updateCV] = useUpdateCVMutation()
-	
+
 	const { education } = data?.cv || {}
 
 	const {
@@ -26,34 +26,33 @@ export const AddEducation = ({ id }) => {
 		defaultValues: { education: [...education] }
 	})
 
-	const { fields, append, remove} = useFieldArray({
+	const { fields, append, remove } = useFieldArray({
 		control,
 		name: 'education'
 	})
 
-	const onNext = async data => {
-		console.log('submitting Education data: ', data)
+	const onSubmit = async data => {
 		await updateCV({ id, data })
 		navigate(`/work/${id}`)
 	}
 
 	const onAppend = () => {
 		setActiveIndex(fields.length)
-		append(/* {
+		append({
 			start: '',
 			end: '',
 			present: false,
 			school: '',
 			subject: '',
 			degree: ''
-		} */)
+		})
 	}
 
 	return (
 		<>
 			{(isLoading || isFetching) && <p>Loading...</p>}
 			{isError && <p className={styles.error}>{error.data?.message}</p>}
-			<form onSubmit={handleSubmit(onNext)} className={styles.form}>
+			<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 				<div className={styles.fieldArray}>
 					{fields.map((field, index) =>
 						index === activeIndex ? (
@@ -61,17 +60,17 @@ export const AddEducation = ({ id }) => {
 								<article className={styles.item}>
 									<div className={styles.downBtn}>
 										<IconButton onClick={() => setActiveIndex()}>
-											<Icon id='chevronUp' className={styles.svg} />
+											<Icon className={styles.svg} id='chevronUp' />
 										</IconButton>
 									</div>
 									<div className={styles.dateItem}>
 										<Field
 											autoFocus
 											id='startDate'
-											name={`education.${index}.start`}
 											type='date'
-											error={errors?.education?.[index]?.start}
+											name={`education.${index}.start`}
 											label='Start date'
+											error={errors?.education?.[index]?.start}
 											register={register}
 										/>
 										<Field
@@ -80,8 +79,8 @@ export const AddEducation = ({ id }) => {
 											name={`education.${index}.end`}
 											label='End date'
 											error={errors?.education?.[index]?.end}
-											disabled={watch(`education.${index}.present`) === true}
 											register={register}
+											disabled={watch(`education.${index}.present`) === true}
 										/>
 										<div className={styles.check}>
 											<input id='now' type='checkbox' {...register(`education.${index}.present`)} />
@@ -114,18 +113,18 @@ export const AddEducation = ({ id }) => {
 								</article>
 								<div className={styles.trash}>
 									<IconButton onClick={() => remove(index)}>
-										<Icon id='trash' className={styles.svg} />
+										<Icon className={styles.svg} id='trash' />
 									</IconButton>
 								</div>
 							</fieldset>
 						) : (
-							<div className={styles.fieldset} key={field?._id}>
+							<div key={field?._id} className={styles.fieldset}>
 								<article className={styles.collapsed}>
 									<p>
 										{fields?.[index]?.degree} at {fields?.[index]?.school}
 									</p>
 									<IconButton onClick={() => setActiveIndex(index)}>
-										<Icon id='chevronDown' className={styles.svg} />
+										<Icon className={styles.svg} id='chevronDown' />
 									</IconButton>
 								</article>
 							</div>

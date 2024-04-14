@@ -4,8 +4,8 @@ import { useFieldArray, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useGetCVQuery, useUpdateCVMutation } from 'shared/api'
 import { Button, IconButton, Icon, Field, Text } from 'shared/ui'
-import styles from 'features/forms/ui/form.module.css'
 import { workSchema } from '../model/formsSchema'
+import styles from 'features/forms/ui/form.module.css'
 
 export const AddWork = ({ id }) => {
 	const [activeIndex, setActiveIndex] = useState()
@@ -13,7 +13,7 @@ export const AddWork = ({ id }) => {
 	const [updateCV] = useUpdateCVMutation()
 	const navigate = useNavigate()
 
-	const { work } = data?.cv || {}
+	const { work } = data?.cv || []
 
 	const {
 		register,
@@ -25,7 +25,7 @@ export const AddWork = ({ id }) => {
 
 	const { fields, append, remove } = useFieldArray({ control, name: 'work' })
 
-	const onNext = async data => {
+	const onSubmit = async data => {
 		try {
 			await updateCV({ id, data })
 			navigate(`/languages/${id}`)
@@ -50,7 +50,7 @@ export const AddWork = ({ id }) => {
 		<>
 			{(isLoading || isFetching) && <p>Loading...</p>}
 			{isError && <p className={styles.error}>{error.data?.message}</p>}
-			<form onSubmit={handleSubmit(onNext)}>
+			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className={styles.fieldArray}>
 					{fields.map((field, index) =>
 						index === activeIndex ? (

@@ -4,16 +4,16 @@ import { useForm, useFieldArray } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useUpdateCVMutation, useGetCVQuery } from 'shared/api'
 import { Button, IconButton, Icon, Field } from 'shared/ui'
-import styles from 'features/forms/ui/form.module.css'
 import { softskillsSchema } from '../model/formsSchema'
+import styles from 'features/forms/ui/form.module.css'
 
 export const AddSoftskills = () => {
 	const { id } = useParams()
-	const navigate = useNavigate()
 	const { data, isLoading, isError, error, isFetching } = useGetCVQuery(id)
 	const [updateCV] = useUpdateCVMutation()
+	const navigate = useNavigate()
+
 	const softskills = data?.cv?.softskills || []
-	console.log('softskills: ', softskills)
 
 	const {
 		register,
@@ -30,9 +30,8 @@ export const AddSoftskills = () => {
 		name: 'softskills'
 	})
 
-	const onNext = async data => {
+	const onSubmit = async data => {
 		try {
-			console.log('Add soft Data: ', data)
 			await updateCV({ id, data })
 			navigate(`/preview/${id}`)
 		} catch (err) {
@@ -49,7 +48,7 @@ export const AddSoftskills = () => {
 			<h1 className={styles.title}>Soft Skills</h1>
 			{(isLoading || isFetching) && <p>Loading...</p>}
 			{isError && <p className={styles.error}>{error.data?.message}</p>}
-			<form onSubmit={handleSubmit(onNext)}>
+			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className={styles.fieldArray}>
 					{fields.map((field, index) => (
 						<fieldset className={styles.fieldset} key={field.id}>

@@ -14,7 +14,7 @@ export const Select = ({ id, name, defaultValue, register, options, label,error,
 				)}
 				<select className={styles.select} size='5' id={id} name={name} {...register(name)}>
 					{options?.map(el => (
-						<option key={el} value={el} className={styles.option}>
+						<option key={el} value={el} className={styles.option} selected={el===defaultValue }>
 							{el}
 						</option>
 					))}

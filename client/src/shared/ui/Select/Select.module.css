@@ -6,6 +6,10 @@
 }
 
 .label {
+	width: 100%;
+	display: flex;
+	flex-flow: column nowrap;
+	gap: var(--space-3xs);
 	color: var(--light-1);
 	font-weight: 500;
 	font-size: var(--fontSize-0);
@@ -33,17 +37,16 @@
 }
 
 .option {
-
-	height: 2rem;
+	background-color: inherit;
+	 height: 2rem;
 	padding: 0.3rem;
-	border-bottom: 0.1em solid var(--accent-2);
 	cursor: pointer;
+	border-bottom: 0.1em solid var(--accent-2); 
 	transition: all 0.5s ease-out;
 
-	&:active {
-		color: var(--accent);
-		height: 3rem;
-		text-align: center;
+	& :selected {
+		
+		/* text-align: center; */
 		font-size: 1rem;
 		outline: none;
 	}
