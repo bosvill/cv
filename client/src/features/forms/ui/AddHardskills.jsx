@@ -14,7 +14,7 @@ export const AddHardskills = () => {
 	const navigate = useNavigate()
 
 	const hardskills = data?.cv?.hardskills || []
-	
+
 	const {
 		register,
 		handleSubmit,
@@ -25,11 +25,15 @@ export const AddHardskills = () => {
 		defaultValues: { hardskills: [...hardskills] }
 	})
 
-	const { fields, append,  remove } = useFieldArray({
+	const { fields, append, remove, update } = useFieldArray({
 		control,
 		name: 'hardskills'
 	})
-
+	useEffect(() => {
+		hardskills.forEach((field, index) => {
+			Object.keys(field).forEach(key => update(index, field[key]))
+		})
+	}, [hardskills, update])
 	const onSubmit = async data => {
 		try {
 			await updateCV({ id, data })

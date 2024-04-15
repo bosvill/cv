@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -23,7 +23,13 @@ export const AddWork = ({ id }) => {
 		formState: { errors, isSubmitting }
 	} = useForm({ defaultValues: { work: [...work] }, resolver: zodResolver(workSchema) })
 
-	const { fields, append, remove } = useFieldArray({ control, name: 'work' })
+	const { fields, append, remove,update } = useFieldArray({ control, name: 'work' })
+
+	useEffect(() => {
+		work?.forEach((field, index) => {
+			Object.keys(field).forEach(key => update(index, field[key]))
+		})
+	}, [work, update])
 
 	const onSubmit = async data => {
 		try {

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useForm, useFieldArray } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -31,7 +31,11 @@ export const AddLanguages = () => {
 		control,
 		name: 'languages'
 	})
-
+useEffect(() => {
+	languages.forEach((field, index) => {
+		Object.keys(field).forEach(key => update(index, field[key]))
+	})
+}, [languages, update])
 	const onSubmit = async data => {
 		try {
 			await updateCV({ id, data })

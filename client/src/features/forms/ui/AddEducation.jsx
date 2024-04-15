@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm, useFieldArray } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -26,10 +26,16 @@ export const AddEducation = ({ id }) => {
 		defaultValues: { education: [...education] }
 	})
 
-	const { fields, append, remove } = useFieldArray({
+	const { fields, append, remove, update } = useFieldArray({
 		control,
 		name: 'education'
 	})
+	useEffect(() => {
+		education?.forEach((field, index) => {
+			console.log(field, index)
+			Object.keys(field).forEach(key => update(index, field[key]))
+		})
+	}, [education, update])
 
 	const onSubmit = async data => {
 		await updateCV({ id, data })
