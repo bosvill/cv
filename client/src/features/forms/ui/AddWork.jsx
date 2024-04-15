@@ -23,13 +23,8 @@ export const AddWork = ({ id }) => {
 		formState: { errors, isSubmitting }
 	} = useForm({ defaultValues: { work: [...work] }, resolver: zodResolver(workSchema) })
 
-	const { fields, append, remove,update } = useFieldArray({ control, name: 'work' })
+	const { fields, append, remove } = useFieldArray({ control, name: 'work' })
 
-	useEffect(() => {
-		work?.forEach((field, index) => {
-			Object.keys(field).forEach(key => update(index, field[key]))
-		})
-	}, [work, update])
 
 	const onSubmit = async data => {
 		try {
@@ -83,7 +78,7 @@ export const AddWork = ({ id }) => {
 											register={register}
 											defaultValue={work?.[index]?.end}
 										/>
-										<div className={` ${styles.check}`}>
+										<div className={styles.check}>
 											<input type='checkbox' {...register(`work.${index}.present`)} />
 											<label htmlFor='present' className={styles.label}>
 												Present
@@ -143,7 +138,9 @@ export const AddWork = ({ id }) => {
 							</div>
 						)
 					)}
-					<Button onClick={onAppend}>Add</Button>
+					<Button type='button' onClick={onAppend}>
+						Add
+					</Button>
 					<Button type='submit' disabled={isSubmitting}>
 						{isSubmitting ? 'Loading' : 'Next'}
 					</Button>

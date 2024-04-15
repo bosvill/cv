@@ -25,15 +25,11 @@ export const AddHardskills = () => {
 		defaultValues: { hardskills: [...hardskills] }
 	})
 
-	const { fields, append, remove, update } = useFieldArray({
+	const { fields, append, remove } = useFieldArray({
 		control,
 		name: 'hardskills'
 	})
-	useEffect(() => {
-		hardskills.forEach((field, index) => {
-			Object.keys(field).forEach(key => update(index, field[key]))
-		})
-	}, [hardskills, update])
+
 	const onSubmit = async data => {
 		try {
 			await updateCV({ id, data })
@@ -59,7 +55,7 @@ export const AddHardskills = () => {
 								<Field
 									id='hard'
 									name={`hardskills.${index}.skill`}
-									defaultValue={hardskills?.[index]?.skill}
+									/* defaultValue={hardskills?.[index]?.skill} */
 									error={errors?.hardskills}
 									register={register}
 								/>
@@ -70,7 +66,9 @@ export const AddHardskills = () => {
 						</fieldset>
 					))}
 
-					<Button onClick={onAppend}>Add</Button>
+					<Button type='button' onClick={onAppend}>
+						Add
+					</Button>
 					<Button type='submit' disabled={isSubmitting}>
 						{isSubmitting ? 'Loading' : 'Next'}
 					</Button>

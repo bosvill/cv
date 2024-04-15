@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useForm, useFieldArray } from 'react-hook-form'
@@ -26,16 +25,10 @@ export const AddSoftskills = () => {
 		defaultValues: { softskills: [...softskills] }
 	})
 
-	const { fields, append,  remove, update } = useFieldArray({
+	const { fields, append, remove } = useFieldArray({
 		control,
 		name: 'softskills'
 	})
-
-	useEffect(() => {
-		softskills.forEach((field, index) => {
-			Object.keys(field).forEach(key => update(index, field[key]))
-		})
-	}, [softskills, update])
 
 	const onSubmit = async data => {
 		try {
@@ -46,8 +39,8 @@ export const AddSoftskills = () => {
 		}
 	}
 
-	const onAppend=()=>{
-		append({skill:''})
+	const onAppend = () => {
+		append({ skill: '' })
 	}
 
 	return (
@@ -63,9 +56,7 @@ export const AddSoftskills = () => {
 								<Field
 									id='soft'
 									autoFocus
-									className={styles.input}
 									name={`softskills.${index}.skill`}
-									type='text'
 									errors={errors?.softskills}
 									register={register}
 								/>
@@ -75,7 +66,9 @@ export const AddSoftskills = () => {
 							</article>
 						</fieldset>
 					))}
-					<Button onClick={onAppend}>Add</Button>
+					<Button type='button' onClick={onAppend}>
+						Add
+					</Button>
 					<Button type='submit' disabled={isSubmitting}>
 						{isSubmitting ? 'Loading' : 'Next'}
 					</Button>

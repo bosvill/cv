@@ -31,11 +31,7 @@ export const AddLanguages = () => {
 		control,
 		name: 'languages'
 	})
-useEffect(() => {
-	languages.forEach((field, index) => {
-		Object.keys(field).forEach(key => update(index, field[key]))
-	})
-}, [languages, update])
+
 	const onSubmit = async data => {
 		try {
 			await updateCV({ id, data })
@@ -103,7 +99,9 @@ useEffect(() => {
 							</div>
 						)
 					)}
-					<Button onClick={onAppend}>Add</Button>
+					<Button type='button' onClick={onAppend}>
+						Add
+					</Button>
 					<Button type='submit' disabled={isSubmitting}>
 						{isSubmitting ? 'Loading' : 'Next'}
 					</Button>

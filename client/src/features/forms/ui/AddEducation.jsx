@@ -22,20 +22,14 @@ export const AddEducation = ({ id }) => {
 		control,
 		watch
 	} = useForm({
-		//resolver: zodResolver(educationSchema),
+		resolver: zodResolver(educationSchema),
 		defaultValues: { education: [...education] }
 	})
 
-	const { fields, append, remove, update } = useFieldArray({
+	const { fields, append, remove } = useFieldArray({
 		control,
 		name: 'education'
 	})
-	useEffect(() => {
-		education?.forEach((field, index) => {
-			console.log(field, index)
-			Object.keys(field).forEach(key => update(index, field[key]))
-		})
-	}, [education, update])
 
 	const onSubmit = async data => {
 		console.log(data)
@@ -79,6 +73,7 @@ export const AddEducation = ({ id }) => {
 											label='Start date'
 											error={errors?.education?.[index]?.start}
 											register={register}
+											/* defaultValue={education?.[index]?.start} */
 										/>
 										<Field
 											id='endDate'
@@ -88,6 +83,7 @@ export const AddEducation = ({ id }) => {
 											error={errors?.education?.[index]?.end}
 											register={register}
 											disabled={watch(`education.${index}.present`) === true}
+											/* defaultValue={education?.[index]?.end} */
 										/>
 										<div className={styles.check}>
 											<input id='now' type='checkbox' {...register(`education.${index}.present`)} />
@@ -102,6 +98,7 @@ export const AddEducation = ({ id }) => {
 										label='School'
 										error={errors?.education?.[index]?.school}
 										register={register}
+										defaultValue={education?.[index]?.school}
 									/>
 									<Field
 										id='sbj'
@@ -109,6 +106,7 @@ export const AddEducation = ({ id }) => {
 										label='Subject'
 										error={errors?.education?.[index]?.subject}
 										register={register}
+										/* defaultValue={education?.[index]?.subject} */
 									/>
 									<Field
 										id='dgr'
@@ -116,6 +114,7 @@ export const AddEducation = ({ id }) => {
 										label='Degree'
 										error={errors?.education?.[index]?.degree}
 										register={register}
+										defaultValue={education?.[index]?.degree}
 									/>
 								</article>
 								<div className={styles.trash}>
@@ -138,7 +137,9 @@ export const AddEducation = ({ id }) => {
 						)
 					)}
 
-					<Button onClick={onAppend}>Add</Button>
+					<Button type='button' onClick={onAppend}>
+						Add
+					</Button>
 
 					<Button type='submit' disabled={isSubmitting}>
 						{isSubmitting ? 'Loading' : 'Next'}

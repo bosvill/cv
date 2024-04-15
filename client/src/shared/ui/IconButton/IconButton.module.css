@@ -5,6 +5,8 @@
 	transition: all 0.5s ease-out;
     display: flex;
     align-items: center;
+    justify-content: center;
+   /*  padding: var(--space-xs); */
 
     & .btn:active,
     .btn:focus {

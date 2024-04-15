@@ -46,7 +46,7 @@ export const educationSchema = z.object({
 			start: z.string(), //z.coerce.date(),
 			end: z.string(), //z.coerce.date().optional(),
 			present: z.boolean().optional(),
-			school: z.string(), //.min(1, { message: 'School is required' })
+			school: z.string().min(1, { message: 'School is required' }),
 			subject: z.string().min(1, { message: 'Subject is required' }),
 			degree: z.string().min(1, { message: 'Degree is required' })
 		})
@@ -68,8 +68,8 @@ export const workSchema = z.object({
 export const languagesSchema = z.object({
 	languages: z.array(
 		z.object({
-			language: z.string().min(1, { message: 'Language is required' }),
-			level: z.string().min(1, { message: 'Level is required' }).optional()
+			language: z.string().min(4, { message: 'Language is required' }),
+			level: z.string().min(2, { message: 'Level is required' }).optional()
 		})
 	)
 })
