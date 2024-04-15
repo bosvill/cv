@@ -35,7 +35,7 @@ export const AddLanguages = () => {
 	const onSubmit = async data => {
 		try {
 			await updateCV({ id, data })
-			navigate(`/hardskills/${id}`)
+			navigate(`/cv/${id}/preview`)
 		} catch (err) {
 			return err
 		}
@@ -46,7 +46,7 @@ export const AddLanguages = () => {
 		append({ language: '', level: '' })
 	}
 	return (
-		<div>
+		<>
 			<h1 className={styles.title}>Languages</h1>
 			{(isLoading || isFetching) && <p>Loading...</p>}
 			{isError && <p className={styles.error}>{error.data?.message}</p>}
@@ -105,6 +105,6 @@ export const AddLanguages = () => {
 					</Button>
 				</div>
 			</form>
-		</div>
+		</>
 	)
 }

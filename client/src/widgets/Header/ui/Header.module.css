@@ -7,7 +7,7 @@
 	gap: var(--space-xs);
 	padding: 0.2rem 1rem;
 	background-color: var(--accent);
-	background: no-repeat center/cover url('src/shared/assets/header.svg'); 
+	background: no-repeat center/cover url('src/shared/assets/header.svg');
 }
 
 /* @container (min-width: 900px) {
@@ -41,7 +41,7 @@
 	font-size: var(--fontSize-1);
 	font-weight: 500;
 }
-.loginLink {
+.link {
 	display: flex;
 	align-items: center;
 	gap: var(--space-3xs);

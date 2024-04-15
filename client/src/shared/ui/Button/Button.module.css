@@ -18,4 +18,9 @@
 		opacity: 80%;
 		color: var(--light-1);
 	}
+
+	& .disabled{
+		opacity: 80%;
+		color: var(--light-1);
+	}
 }

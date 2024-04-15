@@ -1,4 +1,5 @@
 export {CreateCV} from './ui/CreateCV'
+export {ChangeTemplate} from './ui/ChangeTemplate'
 export {AddEducation} from './ui/AddEducation'
 export {AddHardskills} from './ui/AddHardskills'
 export {AddInfo} from './ui/AddInfo'

@@ -1,0 +1,68 @@
+.container {
+	width: min(100% - 3rem, 40rem);
+	margin-inline: auto;
+	background: transparent;
+	padding: var(--space-s);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.crumbs {
+	width: 100%;
+	margin-inline: auto;
+	background: transparent;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items: center;
+	gap: var(--space-3xs);
+	color: var(--dark-1);
+}
+
+.svg {
+	width: var(--fontSize-1);
+	height: var(--fontSize-1);
+	stroke: var(--dark-1);
+
+    &:hover,
+	:focus {
+		stroke: var(--light-1);
+	}
+
+	&:active {
+		stroke: var(--accent-1);
+	}
+}
+
+.file {
+	composes: svg;
+
+	& :hover,
+	.active {
+		stroke: var(--light-1);
+	}
+}
+
+.link {
+	display: flex;
+	align-items: center;
+	gap: var(--space-3xs);
+	cursor: pointer;
+	background-color: transparent;
+    font-weight: 600;
+
+	&:hover,
+	:focus {
+		color: var(--light-1);
+	}
+
+	&.active {
+		color: var(--accent-1);
+	}
+}
+
+.fileLink {
+	align-items: flex-end;
+}

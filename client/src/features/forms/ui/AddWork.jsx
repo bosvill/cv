@@ -28,7 +28,7 @@ export const AddWork = ({ id }) => {
 	const onSubmit = async data => {
 		try {
 			await updateCV({ id, data })
-			navigate(`/languages/${id}`)
+			navigate(`/cv/${id}/hardskills`)
 		} catch (err) {
 			return err
 		}

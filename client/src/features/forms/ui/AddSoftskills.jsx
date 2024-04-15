@@ -33,7 +33,7 @@ export const AddSoftskills = () => {
 	const onSubmit = async data => {
 		try {
 			await updateCV({ id, data })
-			navigate(`/preview/${id}`)
+			navigate(`/cv/${id}/languages`)
 		} catch (err) {
 			return err
 		}
@@ -44,7 +44,7 @@ export const AddSoftskills = () => {
 	}
 
 	return (
-		<div>
+		<>
 			<h1 className={styles.title}>Soft Skills</h1>
 			{(isLoading || isFetching) && <p>Loading...</p>}
 			{isError && <p className={styles.error}>{error.data?.message}</p>}
@@ -74,6 +74,6 @@ export const AddSoftskills = () => {
 					</Button>
 				</div>
 			</form>
-		</div>
+		</>
 	)
 }

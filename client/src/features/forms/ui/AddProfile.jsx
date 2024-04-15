@@ -43,7 +43,7 @@ export const AddProfile = ({ id }) => {
 	const onSubmit = async data => {
 		try {
 			await updateCV({ id, data })
-			navigate(`/info/${id}`)
+			navigate(`/cv/${id}/info`)
 		} catch (err) {
 			return err
 		}

@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from 'react-router-dom'
-import { useSendLogoutMutation} from 'src/shared/api'
+import { useSendLogoutMutation } from 'src/shared/api'
 import { IconButton, Icon } from 'src/shared/ui'
 import styles from './Header.module.css'
 
@@ -14,10 +14,14 @@ const UserSlot = () => {
 	return (
 		<ul className={styles.nav}>
 			<li>
-				<NavLink to='/cv'> Start CV </NavLink>
+				<NavLink to='/create' end className={styles.link}>
+					Start CV
+				</NavLink>
 			</li>
 			<li>
-				<NavLink to={`/user`}> Profile</NavLink>
+				<NavLink to={`/user`} className={styles.link}>
+					Profile
+				</NavLink>
 			</li>
 			<li>
 				<IconButton onClick={onLogout}>

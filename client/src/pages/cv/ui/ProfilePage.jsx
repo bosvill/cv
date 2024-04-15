@@ -1,16 +1,12 @@
 import { useParams } from 'react-router-dom'
-import { useGetCVQuery } from 'shared/api'
 import { ProfileIntro } from 'entities/intro'
 import { AddProfile } from 'features/forms'
-import styles from './cv.module.css'
+import styles from './pages.module.css'
 
-export const Profile = () => {
+export const ProfilePage = () => {
 	const { id } = useParams()
-
-	
-
 	return (
-		<div className={styles.wrapper}>
+		<div className={styles.container}>
 			<section className={styles.section}>
 				<ProfileIntro />
 				<AddProfile id={id} />

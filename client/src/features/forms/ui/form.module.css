@@ -21,7 +21,18 @@
 	margin: 0;
 }
 
+
+.details{
+    font-size: var(--fontSize-0);
+	font-weight: 500;
+	line-height: 1.1;
+	color: var(--dark-1);
+	padding-inline:  var(--space-xs);
+}
+
+
 .title {
+	text-align: center;
 	font-family: inherit;
 	color: var(--accent);
 	margin-bottom: var(--space-m);
@@ -40,10 +51,14 @@
 	display: flex;
 	justify-content: space-between;
 	padding: var(--space-xs);
+	color: var(--accent);
+	font-weight: 500;
+	font-size: var(--fontSize-0);
 }
 
 .legend {
 	color: var(--accent-2);
+	font-weight: 600;
 }
 
 .fieldset {
