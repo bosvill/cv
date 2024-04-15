@@ -1,4 +1,5 @@
 
+import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useForm, useFieldArray } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -25,10 +26,16 @@ export const AddSoftskills = () => {
 		defaultValues: { softskills: [...softskills] }
 	})
 
-	const { fields, append,  remove } = useFieldArray({
+	const { fields, append,  remove, update } = useFieldArray({
 		control,
 		name: 'softskills'
 	})
+
+	useEffect(() => {
+		softskills.forEach((field, index) => {
+			Object.keys(field).forEach(key => update(index, field[key]))
+		})
+	}, [softskills, update])
 
 	const onSubmit = async data => {
 		try {
