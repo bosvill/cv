@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useMatches, useNavigate, useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useSelector } from 'react-redux'
@@ -10,6 +10,7 @@ import styles from 'src/features/forms/ui/form.module.css'
 
 export const AddInfo = () => {
 	const { id } = useParams()
+	const matches=useMatches()
 	const mail = useSelector(selectEmail)
 	const { data, isLoading, isSuccess, isError, error } = useGetCVQuery(id)
 	const [updateCV, { isLoading: isUpdating, isError: isUpdateError, error: updateError }] =
@@ -18,7 +19,7 @@ export const AddInfo = () => {
 
 	const { firstName, lastName, phone, email, street, zip, city, github, linkedIn, homepage } =
 		data?.cv || {}
-
+console.log(matches)
 	const {
 		register,
 		handleSubmit,
@@ -47,7 +48,7 @@ export const AddInfo = () => {
 	const onSubmit = async data => {
 		try {
 			await updateCV({ id, data })
-			navigate(`/education/${id}`)
+			navigate(`/cv/${id}/education`)
 		} catch (err) {
 			return err
 		}

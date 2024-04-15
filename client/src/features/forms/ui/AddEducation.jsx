@@ -22,7 +22,7 @@ export const AddEducation = ({ id }) => {
 		control,
 		watch
 	} = useForm({
-		resolver: zodResolver(educationSchema),
+		//resolver: zodResolver(educationSchema),
 		defaultValues: { education: [...education] }
 	})
 
@@ -38,8 +38,9 @@ export const AddEducation = ({ id }) => {
 	}, [education, update])
 
 	const onSubmit = async data => {
+		console.log(data)
 		await updateCV({ id, data })
-		navigate(`/work/${id}`)
+		navigate(`/cv/${id}/work`)
 	}
 
 	const onAppend = () => {

@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 const Home = () => {
     return (
-			<div className={styles.homeWrapper}>
+			<div className={styles.container}>
 				<main className={styles.main}>
 					<div>
 						<h1 className={styles.heading}>Best Free CV Builder</h1>

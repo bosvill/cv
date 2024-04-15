@@ -46,7 +46,7 @@ export const educationSchema = z.object({
 			start: z.string(), //z.coerce.date(),
 			end: z.string(), //z.coerce.date().optional(),
 			present: z.boolean().optional(),
-			school: z.string().min(1, { message: 'School is required' }),
+			school: z.string(), //.min(1, { message: 'School is required' })
 			subject: z.string().min(1, { message: 'Subject is required' }),
 			degree: z.string().min(1, { message: 'Degree is required' })
 		})

@@ -37,7 +37,7 @@ export const AddHardskills = () => {
 	const onSubmit = async data => {
 		try {
 			await updateCV({ id, data })
-			navigate(`/softskills/${id}`)
+			navigate(`/cv/${id}/softskills`)
 		} catch (err) {
 			return err
 		}
@@ -47,7 +47,7 @@ export const AddHardskills = () => {
 		append({ skill: '' })
 	}
 	return (
-		<div>
+		<>
 			<h1 className={styles.title}>Hard Skills</h1>
 			{(isLoading || isFetching) && <p>Loading...</p>}
 			{isError && <p className={styles.error}>{error.data?.message}</p>}
@@ -76,6 +76,6 @@ export const AddHardskills = () => {
 					</Button>
 				</div>
 			</form>
-		</div>
+		</>
 	)
 }

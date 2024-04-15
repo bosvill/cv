@@ -1,9 +1,10 @@
-.homeWrapper {
-	/* width: min(100% - 1rem, 80ch); */
+.container {
+	 width: min(100% - 1rem, 80ch);
 	margin-inline: auto;
 	display: flex;
 	flex-flow: column;
 	align-items: center;
+    justify-content: space-between;
    /*  background: no-repeat center/cover url('src/shared/assets/bg.svg');  */
 }
 
