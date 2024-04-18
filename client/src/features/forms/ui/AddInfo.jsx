@@ -56,7 +56,6 @@ console.log(matches)
 
 	return (
 		<section className={styles.section}>
-			<h1 className={styles.title}>Add personal information</h1>
 			{(isError || isUpdateError) && <p className={styles.error}>{error.data?.message}</p>}
 			{(isLoading || isUpdating) && <p>Loading...</p>}
 			<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -83,8 +82,16 @@ console.log(matches)
 
 				<fieldset className={styles.fieldset}>
 					<legend className={styles.legend}>Address</legend>
-					<Field id='str' name='street' label='Street' error={errors?.street} register={register} />
-					<div className={styles.addressItem}>
+					<div className={styles.contactItem}>
+						<div className={styles.street}>
+							<Field
+								id='str'
+								name='street'
+								label='Street'
+								error={errors?.street}
+								register={register}
+							/>
+						</div>
 						<Field
 							id='z'
 							name='zip'

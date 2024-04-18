@@ -6,8 +6,8 @@
 	--text-dark:#070707;
     
     appearance: none;
-	max-width: 595px;
-	max-height: 842px;
+	/* max-width: 595px;
+	max-height: 842px; */
 	display: grid;
 	grid-template-columns: 1fr 2fr;
 	border: 1px solid var(--react);

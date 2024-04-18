@@ -24,7 +24,7 @@ const UserSlot = () => {
 				</NavLink>
 			</li>
 			<li>
-				<IconButton onClick={onLogout}>
+				<IconButton onClick={onLogout} title='Logout'>
 					<Icon className={styles.svg} id='exit' />
 				</IconButton>
 			</li>

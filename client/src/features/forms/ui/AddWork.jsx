@@ -25,7 +25,6 @@ export const AddWork = ({ id }) => {
 
 	const { fields, append, remove } = useFieldArray({ control, name: 'work' })
 
-
 	const onSubmit = async data => {
 		try {
 			await updateCV({ id, data })
@@ -53,15 +52,10 @@ export const AddWork = ({ id }) => {
 			{isError && <p className={styles.error}>{error.data?.message}</p>}
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className={styles.fieldArray}>
-					{fields.map((field, index) =>
-						index === activeIndex ? (
-							<fieldset key={field?.id} className={styles.fieldset}>
+					{fields.map((field, index) => (
+						<fieldset key={field?.id} className={styles.fieldset}>
+							{index === activeIndex ? (
 								<article className={styles.item}>
-									<div className={styles.downBtn}>
-										<IconButton onClick={() => setActiveIndex()}>
-											<Icon id='chevronUp' className={styles.svg} />
-										</IconButton>
-									</div>
 									<div className={styles.dateItem}>
 										<Field
 											name={`work.${index}.start`}
@@ -119,25 +113,30 @@ export const AddWork = ({ id }) => {
 										defaultValue={work?.[index]?.description}
 									/>
 								</article>
-								<div className={styles.trash}>
-									<IconButton onClick={() => remove(index)}>
-										<Icon className={styles.svg} id='trash' />
-									</IconButton>
-								</div>
-							</fieldset>
-						) : (
-							<div className={styles.fieldset} key={field?._id}>
-								<article className={styles.collapsed}>
+							) : (
+								<article className={styles.collapsed} key={field?._id}>
 									<p>
 										{fields?.[index]?.position} at {fields?.[index]?.company}
 									</p>
-									<IconButton onClick={() => setActiveIndex(index)}>
-										<Icon id='chevronDown' className={styles.svg} />
-									</IconButton>
 								</article>
+							)}
+							<div className={styles.btnItem}>
+								{index === activeIndex ? (
+									<IconButton onClick={() => setActiveIndex()}>
+										<Icon className={styles.svg} id='chevronUp' title='Close' />
+									</IconButton>
+								) : (
+									<IconButton onClick={() => setActiveIndex(index)}>
+										<Icon className={styles.svg} id='chevronDown' title='Show' />
+									</IconButton>
+								)}
+
+								<IconButton onClick={() => remove(index)}>
+									<Icon className={styles.svg} id='trash' title='Delete' />
+								</IconButton>
 							</div>
-						)
-					)}
+						</fieldset>
+					))}
 					<Button type='button' onClick={onAppend}>
 						Add
 					</Button>

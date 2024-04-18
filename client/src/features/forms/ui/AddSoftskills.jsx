@@ -51,7 +51,7 @@ export const AddSoftskills = () => {
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className={styles.fieldArray}>
 					{fields.map((field, index) => (
-						<fieldset className={styles.fieldset} key={field.id}>
+						<fieldset className={styles.skillsFieldset} key={field.id}>
 							<article className={styles.skillItem}>
 								<Field
 									id='soft'

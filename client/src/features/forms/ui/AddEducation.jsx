@@ -55,15 +55,10 @@ export const AddEducation = ({ id }) => {
 			{isError && <p className={styles.error}>{error.data?.message}</p>}
 			<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 				<div className={styles.fieldArray}>
-					{fields.map((field, index) =>
-						index === activeIndex ? (
-							<fieldset className={styles.fieldset} key={field.id}>
+					{fields.map((field, index) => (
+						<fieldset className={styles.fieldset} key={field.id}>
+							{index === activeIndex ? (
 								<article className={styles.item}>
-									<div className={styles.downBtn}>
-										<IconButton onClick={() => setActiveIndex()}>
-											<Icon className={styles.svg} id='chevronUp' />
-										</IconButton>
-									</div>
 									<div className={styles.dateItem}>
 										<Field
 											autoFocus
@@ -117,25 +112,30 @@ export const AddEducation = ({ id }) => {
 										defaultValue={education?.[index]?.degree}
 									/>
 								</article>
-								<div className={styles.trash}>
-									<IconButton onClick={() => remove(index)}>
-										<Icon className={styles.svg} id='trash' />
-									</IconButton>
-								</div>
-							</fieldset>
-						) : (
-							<div key={field?._id} className={styles.fieldset}>
-								<article className={styles.collapsed}>
+							) : (
+								<article className={styles.collapsed} key={field?._id}>
 									<p>
 										{fields?.[index]?.degree} at {fields?.[index]?.school}
 									</p>
-									<IconButton onClick={() => setActiveIndex(index)}>
-										<Icon className={styles.svg} id='chevronDown' />
-									</IconButton>
 								</article>
+							)}
+							<div className={styles.btnItem}>
+								{index === activeIndex ? (
+									<IconButton onClick={() => setActiveIndex()}>
+										<Icon className={styles.svg} id='chevronUp' title='Close' />
+									</IconButton>
+								) : (
+									<IconButton onClick={() => setActiveIndex(index)}>
+										<Icon className={styles.svg} id='chevronDown' title='Show' />
+									</IconButton>
+								)}
+
+								<IconButton onClick={() => remove(index)}>
+									<Icon className={styles.svg} id='trash' title='Delete' />
+								</IconButton>
 							</div>
-						)
-					)}
+						</fieldset>
+					))}
 
 					<Button type='button' onClick={onAppend}>
 						Add

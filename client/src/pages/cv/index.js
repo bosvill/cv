@@ -1,5 +1,4 @@
-export {default} from 'src/pages/cv/Preview'
-export {InfoPage} from './ui/InfoPage'
+export { InfoPage } from './ui/InfoPage'
 export { ProfilePage } from './ui/ProfilePage'
 export { EducationPage } from './ui/EducationPage'
 export { WorkPage } from './ui/WorkPage'

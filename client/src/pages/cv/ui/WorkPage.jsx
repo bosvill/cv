@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom'
 import { AddWork } from 'features/forms'
-import { WorkIntro } from 'entities/intro'
 import styles from './pages.module.css'
 
 export const WorkPage = () => {
@@ -9,7 +8,10 @@ export const WorkPage = () => {
 	return (
 		<div className={styles.container}>
 			<section className={styles.section}>
-				<WorkIntro />
+				<div className={styles.intro}>
+					<h1 className={styles.title}>Proffesional Experience</h1>
+					<p className={styles.details}>Show your relevant work experience and main achievements</p>
+				</div>
 				<AddWork id={id} />
 			</section>
 		</div>

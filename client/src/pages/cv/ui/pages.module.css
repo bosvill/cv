@@ -13,7 +13,7 @@
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	gap: var(--space-m);
+	gap: var(--space-s);
 
 	@media screen and(min-width: 600px) {
 		& {
@@ -28,4 +28,28 @@
 	flex-direction: column;
 	gap: var(--space-m);
 
+}
+
+.intro{
+width: 100%;
+text-align: center;
+}
+
+.title {
+	font-family: inherit;
+	color: var(--accent);
+	/* margin-bottom: var(--space-m); */
+	padding-inline:  var(--space-xs);
+}
+
+.details{
+    font-size: var(--fontSize-0);
+	font-weight: 500;
+	line-height: 1.1;
+	color: var(--dark-1);
+	padding-inline:  var(--space-xs);
+}
+
+.error {
+	color: var(--error);
 }

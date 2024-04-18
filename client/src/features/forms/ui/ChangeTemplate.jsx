@@ -32,15 +32,17 @@ export const ChangeTemplate = () => {
 			{isError && <p className={styles.error}>{error.data?.message}</p>}
 			{(isLoading || isFetching) && <p>Loading...</p>}
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<fieldset className={styles.fieldset}>
-					<legend>Choose template</legend>
-					<Radio name='template' label='Green' value='green' register={register} />
-					<Radio name='template' label='React' value='react' register={register} />
-				</fieldset>
+				<div className={styles.fieldArray}>
+					<fieldset className={styles.fieldset}>
+						<legend>Choose template</legend>
+						<Radio name='template' label='Green' value='green' register={register} />
+						<Radio name='template' label='React' value='react' register={register} />
+					</fieldset>
 
 				<Button type='submit' disabled={isSubmitting}>
 					{isSubmitting ? 'Loading' : 'Next'}
 				</Button>
+				</div>
 			</form>
 		</>
 	)

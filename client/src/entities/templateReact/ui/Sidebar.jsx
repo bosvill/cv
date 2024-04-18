@@ -1,8 +1,8 @@
+import {v4} from 'uuid'
 import { Icon } from 'shared/ui'
-import styles from './templateReact.module.css'
 import { showLevel } from 'shared/lib/level'
 import { showMeter } from '../lib/showMeter'
-import {v4} from 'uuid'
+import styles from './templateReact.module.css'
 
 export const Sidebar = ({ cv }) => {
 	console.log(showMeter(5))

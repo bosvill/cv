@@ -44,13 +44,12 @@ export const AddHardskills = () => {
 	}
 	return (
 		<>
-			<h1 className={styles.title}>Hard Skills</h1>
 			{(isLoading || isFetching) && <p>Loading...</p>}
 			{isError && <p className={styles.error}>{error.data?.message}</p>}
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<div className={styles.fieldArray}>
 					{fields.map((field, index) => (
-						<fieldset className={styles.fieldset} key={field.id}>
+						<fieldset className={styles.skillsFieldset} key={field.id}>
 							<article className={styles.skillItem}>
 								<Field
 									id='hard'
