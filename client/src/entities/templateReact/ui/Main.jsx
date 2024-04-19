@@ -32,8 +32,11 @@ export const Main = ({ cv }) => {
 							<h5 className={styles.react}>
 								{el.position}, {el.company}
 							</h5>
+							<ul>
 
-							<p>{el.description}</p>
+							{el.description.split('\n').map((d,i)=><li>{d[i]}</li>)}
+							
+							</ul>
 						</li>
 					))}
 				</ul>
