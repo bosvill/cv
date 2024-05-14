@@ -21,7 +21,7 @@ export const LoginForm = () => {
 	const onSubmit = async data => {
 		try {
 			await login(data).unwrap()
-			navigate('/user')
+			navigate('/user/cvs')
 		} catch (err) {
 			return err
 		}

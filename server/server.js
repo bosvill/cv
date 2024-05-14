@@ -1,9 +1,10 @@
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
+
 import connectDB from './db/db.js'
-import errorHandler from './middlewares/errorHandler.js'
-import ApiError from './utils/ApiError.js'
+import errorResponse from './middlewares/errorMiddleware.js'
+
 import userRouter from './routes/userRouter.js'
 import cvRouter from './routes/cvRouter.js'
 import imgRouter from './routes/imgRouter.js'
@@ -24,10 +25,7 @@ app.use('/api/user', userRouter)
 app.use('/api/cv', cvRouter)
 app.use('/api/img', imgRouter)
 
-/* app.get('/', (req, res, next) => {
-	throw ApiError.UnauthorizedError('Test errror')
-}) */
-app.use(errorHandler)
+app.use(errorResponse)
 
 app.listen(process.env.PORT, () =>
 	console.log(`Server started on http://127.0.0.1:${process.env.PORT}`)

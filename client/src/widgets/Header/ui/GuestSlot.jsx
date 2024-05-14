@@ -7,7 +7,7 @@ const GuestSlot = () => {
 		<ul className={styles.nav}>
 			<li>
 				<NavLink to='/login' className={styles.link}>
-					Login
+					<span>Login</span>
 					<Icon id='enter' className={styles.svg} />
 				</NavLink>
 			</li>

@@ -7,7 +7,8 @@ export const breadcrumbs=id =>{
 		{ to: `cv/${id}/work`, label: 'Experience', step: 5 },
 		{ to: `cv/${id}/hardskills`, label: 'Hardskills', step: 6 },
 		{ to: `cv/${id}/softskills`, label: 'Softskills', step: 7 },
-		{ to: `cv/${id}/languages`, label: 'Languages', step: 8 }
+		{ to: `cv/${id}/languages`, label: 'Languages', step: 8 },
+    { to: `cv/${id}/preview`, label: 'Preview', step: 9 }
  ]
 return links
 }

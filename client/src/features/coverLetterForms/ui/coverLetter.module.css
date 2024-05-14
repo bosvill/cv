@@ -1,0 +1,38 @@
+.form {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-s);
+}
+
+
+.fieldset {
+  width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: var(--space-s);
+	padding: var(--space-xs);
+	border: 0.01rem solid #d5e1f5;
+	box-shadow: 0.05rem 0.1rem 0.1rem 0.05rem var(--shadow);
+}
+
+.legend {
+  color: var(--accent-2);
+  font-weight: 600;
+}
+
+.item {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-xs);
+	flex: 1;
+
+  @media (min-width: 640px) {
+		& {
+			flex-direction: row;
+		}
+	}
+}
+
+

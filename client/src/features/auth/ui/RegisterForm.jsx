@@ -15,7 +15,6 @@ export const RegisterForm = () => {
 	const {
 		register,
 		handleSubmit,
-		getValues,
 		formState: { errors }
 	} = useForm({ resolver: zodResolver(registerSchema) })
 
@@ -36,7 +35,7 @@ export const RegisterForm = () => {
 				<div className={styles.formItem}>
 					<Field
 						autoFocus
-						id='email'
+						id='mail'
 						name='email'
 						label='Email'
 						error={errors?.email}

@@ -1,0 +1,10 @@
+.container {
+	align-self: center;
+	width: min(100% - 3rem, 40rem);
+	margin-inline: auto;
+	background: transparent;
+	padding: var(--space-s);
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+}

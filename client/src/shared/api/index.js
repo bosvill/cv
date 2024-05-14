@@ -20,3 +20,5 @@ export { useUploadImageMutation, useDeleteImageMutation } from './image/imageApi
 export { setCV, selectCV } from './cv/cvSlice'
 export { setImage, resetImage, selectImage } from './image/imageSlice'
 export { setCredentials, logout, selectToken, selectUser,selectEmail } from './auth/authSlice'
+export {setLetter, selectLetter} from './letter/letterSlice'
+

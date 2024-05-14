@@ -1,0 +1,75 @@
+/* Styles for header */
+.links{
+  display: flex;
+  justify-content: center;
+  gap: var(--space-s);
+  padding: var(--space-s);
+  font-size: var(--fontSize-2);
+  font-weight: 500;
+}
+
+/* Styles for CvList */
+.container{
+  padding: var(--space-s);
+}
+
+.cardsContainer{
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
+}
+
+.msg{
+    color: var(--accent-2);
+}
+.error {
+	color: var(--error);
+}
+
+.link{
+    color: var(--svg);
+}
+.card{
+  color: var(--accent);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-s);
+  padding: var(--space-xs);
+  border: 0.01rem solid #d5e1f5;
+  box-shadow: 0.05rem 0.1rem 0.1rem 0.05rem var(--shadow);
+}
+
+.created{
+  color: var(--accent-2);
+}
+.svg {
+	width: var(--fontSize-1);
+	height: var(--fontSize-1);
+	padding: 0;
+	margin: 0;
+	border: none;
+	background-color: transparent;
+	stroke: var(--accent);
+	cursor: pointer;
+	fill: none;
+
+	&:hover,
+	:focus {
+		stroke: var(--accent-2);
+	}
+
+	&:active {
+		stroke: var(--accent-1);
+	}
+}
+
+.btns{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-s);
+}
+
+

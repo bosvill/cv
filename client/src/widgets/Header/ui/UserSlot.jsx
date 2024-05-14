@@ -18,8 +18,13 @@ const UserSlot = () => {
 					Start CV
 				</NavLink>
 			</li>
+      <li>
+				<NavLink to='/cover' end className={styles.link}>
+					Cover Letter
+				</NavLink>
+			</li>
 			<li>
-				<NavLink to={`/user`} className={styles.link}>
+				<NavLink to={`/user/cvs`} className={styles.link}>
 					Profile
 				</NavLink>
 			</li>

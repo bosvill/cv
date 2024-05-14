@@ -3,7 +3,7 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import styles from './layouts.module.css'
 
-const FormLayout = () => {
+export const FormLayout = () => {
 	return (
 		<main className={styles.main}>
 			 <Breadcrumbs/> 
@@ -12,4 +12,4 @@ const FormLayout = () => {
 	)
 }
 
-export default FormLayout
+
