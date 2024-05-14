@@ -1,27 +1,59 @@
-.homeWrapper {
-	/* width: min(100% - 1rem, 80ch); */
-	margin-inline: auto;
+/*  background: no-repeat center/cover url('src/shared/assets/bg.svg');  */
+
+.main {
+  width: min(100% - 3rem, 40rem);
+  
+}
+.container {
+  width: 100%;
+	align-self: center;
+  margin-inline: auto;
+	color: var(--light);
+	background: transparent;
+	padding: var(--space-m);
 	display: flex;
 	flex-flow: column;
 	align-items: center;
-   /*  background: no-repeat center/cover url('src/shared/assets/bg.svg');  */
+  gap: var(--space-m);
 }
 
-.main {
-	
-    color: var(--text);
-}
+
 
 .heading {
-    font-weight: 700;
-    font-size: var(--fontSize-3);
+  font-weight: 700;
+  font-size: var(--fontSize-5);
 }
 
 .subHeading {
-    font-weight: 500;
-    font-size: var(--fontSize-1);
+  font-weight: 500;
+  font-size: var(--fontSize-2);
 }
 
 .cta {
-    color: var(--dark);
+  padding: var(--space-xl);
+  color: var(--accent);
+  font-weight: 600;
+  font-size: var(--fontSize-2);
+  background-color: var(--accent-2);
+  background: no-repeat center/cover url('src/shared/assets/blob-haikei(3).svg');
+
+ 
+  
 }
+
+
+
+
+
+
+
+
+
+
+
+ /*
+* Created with https://www.css-gradient.com
+* Gradient link: https://www.css-gradient.com/?c1=2a5bdb&c2=324656&gt=r&gd=dcc
+background: #2a5bdb;
+  background: radial-gradient(at center,var(--accent-2),var(--accent));
+*/

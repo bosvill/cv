@@ -35,7 +35,7 @@ const imgUploadMiddleware = folderName => {
 			) {
 				cb(null, true)
 			} else {
-				return cb(ApiError.ValidationError('Invalid file type'))
+				return cb(ApiError.Validation('Invalid file type'))
 			}
 		}
 	})

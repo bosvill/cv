@@ -1,9 +1,9 @@
 const levels = [
-	['A1', 'A2', 'Working knoweledge', 'Elementary Proficiency'],
-	['B1', 'Good working knoweledge', 'Limited Working Proficiency'],
-	['B2', 'Very good command', 'Minimum Professional Proficiency'],
-	['C1', 'Highly proficient', 'Full Professional Proficiency'],
-	['C2', 'Native speaker', 'Native or Bilingual Proficiency']
+	['A1', 'A2', 'Working knoweledge'],
+	['B1', 'Good working knoweledge'],
+	['B2', 'Very good command'],
+	['C1', 'Highly proficient'],
+	['C2', 'Native speaker']
 ]
 
 export const showLevel = level => {

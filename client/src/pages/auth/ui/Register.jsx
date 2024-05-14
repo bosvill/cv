@@ -4,7 +4,7 @@ import styles from './auth.module.css'
 
 export const Register = () => {
 	return (
-		<main className={styles.wrapper}>
+		<main className={styles.container}>
 			<div>
 				<RegisterForm />
 				<div className={styles.linkItem}>

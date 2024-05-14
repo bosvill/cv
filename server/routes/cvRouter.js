@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import auth from '../middlewares/authHandler.js'
+import auth from '../middlewares/authMiddleware.js'
 import { deleteCV, getAllCV, getCV, createCV, updateCV } from '../controllers/cvController.js'
 const cvRouter = Router()
 cvRouter.route('/').post(auth,createCV)

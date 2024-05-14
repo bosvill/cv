@@ -11,19 +11,18 @@ export const Field = ({ id, name, label, register, error, ...props }) => {
 				) : (
 					label
 				)}
-
-				<input
-					className={styles.input}
-					aria-invalid={error?.name ? 'true' : 'false'}
-					name={name}
-					aria-label={label}
-					{...(props.type === 'number'
-						? { ...register(name, { valueAsNumber: true }) }
-						: { ...register(name) })}
-					{...props}
-					autoComplete='true'
-				/>
 			</label>
+			<input
+				className={styles.input}
+				aria-invalid={error?.name ? 'true' : 'false'}
+				name={name}
+				aria-label={label}
+				{...(props.type === 'number'
+					? { ...register(name, { valueAsNumber: true }) }
+					: { ...register(name) })}
+				{...props}
+				autoComplete='true'
+			/>
 		</div>
 	)
 }

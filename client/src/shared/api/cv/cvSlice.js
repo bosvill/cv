@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import {cvApi} from './cvApi'
 
 /* const initialState = {
 	cv: {
@@ -27,19 +28,29 @@ import { createSlice } from '@reduxjs/toolkit'
 	}
 } */
 const cvSlice = createSlice({
-	name: 'cv',
-	initialState:{},
-	reducers: {
-		setCV: (state, { payload }) => {
+  name: 'cv',
+  initialState: {},
+  reducers: {
+    /* setCV: (state, { payload }) => {
 			console.log(payload)
 			state.cv = payload
-		}
-	},
-	selectors: {
-		selectCV: state => state.id
-	}
+		} */
+  },
+  extraReducers: builder => {
+    builder
+    .addMatcher(
+      cvApi.endpoints.getCV.matchFulfilled,
+      (state, { payload }) => {
+        state.cv = payload
+      }
+    )
+    
+  },
+  selectors: {
+    selectCV: state => state.id
+  }
 })
 
 export default cvSlice.reducer
 export const { setCV } = cvSlice.actions
-export const { selectCV} = cvSlice.selectors
+export const { selectCV } = cvSlice.selectors

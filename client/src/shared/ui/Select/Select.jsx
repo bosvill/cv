@@ -12,14 +12,14 @@ export const Select = ({ id, name, defaultValue, register, options, label,error,
 				) : (
 					label
 				)}
-				<select className={styles.select} size='5' id={id} name={name} {...register(name)}>
+					</label>
+				<select className={styles.select} id={id} name={name} {...register(name)}>
 					{options?.map(el => (
-						<option key={el} value={el} className={styles.option} selected={el===defaultValue }>
+						<option key={el} value={el} className={styles.option} >
 							{el}
 						</option>
 					))}
 				</select>
-			</label>
 		</div>
 	)
 }

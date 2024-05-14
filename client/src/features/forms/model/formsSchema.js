@@ -68,8 +68,8 @@ export const workSchema = z.object({
 export const languagesSchema = z.object({
 	languages: z.array(
 		z.object({
-			language: z.string().min(1, { message: 'Language is required' }),
-			level: z.string().min(1, { message: 'Level is required' }).optional()
+			language: z.string().min(4, { message: 'Language is required' }),
+			level: z.string().min(2, { message: 'Level is required' }).optional()
 		})
 	)
 })

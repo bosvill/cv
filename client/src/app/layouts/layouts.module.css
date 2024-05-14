@@ -1,0 +1,9 @@
+.main {
+  width: min(100% - var(--space-s), 45rem);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-s);
+}
+

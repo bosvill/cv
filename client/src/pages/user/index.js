@@ -1,1 +1,2 @@
-export {default}  from './ui/UserProfile'
+export { UserHome } from './ui/UserHome'
+export {Account} from './ui/Account'

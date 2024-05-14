@@ -43,7 +43,7 @@ export const AddProfile = ({ id }) => {
 	const onSubmit = async data => {
 		try {
 			await updateCV({ id, data })
-			navigate(`/info/${id}`)
+			navigate(`/cv/${id}/info`)
 		} catch (err) {
 			return err
 		}
@@ -115,14 +115,15 @@ export const AddProfile = ({ id }) => {
 				</fieldset>
 				<fieldset className={styles.fieldset}>
 					<legend className={styles.legend}>Position and short Profile</legend>
+					<div className={styles.item}>
+
 					<Field
 						name='position'
 						type='text'
 						label='Position'
 						error={errors?.position}
 						register={register}
-					/>
-					{/* <UploadImage /> */}
+						/>
 
 					<Text
 						name='profile'
@@ -130,7 +131,8 @@ export const AddProfile = ({ id }) => {
 						label='Profile'
 						error={errors?.profile}
 						register={register}
-					/>
+						/>
+						</div>
 				</fieldset>
 				<div className={styles.submitWrapper}>
 					<Button type='submit' disabled={isSubmitting}>

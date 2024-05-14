@@ -1,4 +1,9 @@
-export { Sidebar } from './ui/Sidebar'
-export {showMeter} from './lib/showMeter'
-
-
+export { Details } from './ui/Details'
+export { Education } from './ui/Education'
+export { Hardskills } from './ui/Hardskills'
+export { Header } from './ui/Header'
+export { Image } from './ui/Image'
+export { Languages } from './ui/Languages'
+export { Softskills } from './ui/Softskills'
+export { Work } from './ui/Work'
+export {Letter} from './ui/Letter'

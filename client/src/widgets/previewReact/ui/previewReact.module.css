@@ -1,14 +1,68 @@
-.container{
-    --react: #087ea4;
-	--bg-dark:#23272f;
-	--dark:#343a46;
-	--text-light:rgba(246, 247, 249, 0.8);
-	--text-dark:#070707;
-    
-    appearance: none;
-	max-width: 595px;
-	max-height: 842px;
-	display: grid;
-	grid-template-columns: 1fr 2fr;
-	border: 1px solid var(--react);
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+.container {
+  /*  height: fit-content; */
+  font-family: 'Noto Sans', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: var(--space-s);
+  /* padding: var(--space-s); */
+}
+.print {
+  --react-accent: #58c4dc;
+  --react-accent-1:#087ea4;
+  --react-bg: #23272f;
+  --react-text: #f6f7f9;
+  --react-text-1: #191c22;
+  --react-text-2: #343944;
+  --react-text-3:#404756;
+
+  appearance: none;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  border: 0.01rem solid #d5e1f5;
+  box-shadow: 0.05rem 0.1rem 0.1rem 0.05rem var(--shadow);
+
+  @media print {
+    @page {
+      size: A4 portrait;
+    }
+  }
+}
+
+.aside {
+  width: 100%;
+  background-color: var( --react-bg);
+  font-size: var(--fontSize--1);
+  font-weight: 500;
+  color: var(--react-text);
+  padding: var(--space-s);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+  box-shadow: 2px 2px -6px var(--shadow-1);
+
+  @media print {
+    height: 100vh;
+    overflow: hidden;
+  }
+}
+
+.main {
+  /* font-size: 12px; */
+  padding: var(--space-m);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-m);
+
+  @media print {
+    height: 100vh;
+  }
+}
+
+.printBtn {
+  width: 100%;
+  display: flex;
+  gap: var(--space-s);
+  margin-bottom: var(--space-s);
 }

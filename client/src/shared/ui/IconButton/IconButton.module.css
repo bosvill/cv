@@ -1,20 +1,20 @@
 .btn {
-	appearance: none;
-	cursor: pointer;
-    background-color: transparent;
-	transition: all 0.5s ease-out;
-    display: flex;
-    align-items: center;
+  appearance: none;
+  cursor: pointer;
+  background-color: transparent;
+  transition: all 0.5s ease-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /*  padding: var(--space-xs); */
 
-    & .btn:active,
-    .btn:focus {
-        outline: none;
-        border: 2px solid var(--greyT);
-    } 
-    & .btn:hover {
-        outline: none;
-        opacity: 80%;
-}}
-
-
-    
+  & .btn:active,
+  .btn:focus {
+    outline: none;
+    border: 2px solid var(--greyT);
+  }
+  & .btn:hover {
+    outline: none;
+    opacity: 80%;
+  }
+}

@@ -1,155 +1,164 @@
-.aside {
-	width: 235px;
-	background-color: var(--dark);
-	font-size: var(--fontSize--1);
-	font-weight: 500;
-	color: var(--text-light);
-	/* background: no-repeat center/cover url('src/assets/react-gradient-haikei.svg'); */
-	padding: var(--space-xs);
-	display: flex;
-	flex-direction: column;
-	gap: var(--space-s);
-	box-shadow: 2px 2px -6px var(--shadow-1);
-}
-
-.imgWrapper {
-	align-self: center;
-}
-.img {
-	width: 7rem;
-	height: 7rem;
-	border-radius: 50%;
+/* Common styles for template */
+.line {
+  width: 90%;
+  color: var(--react-accent-1);
+  margin-bottom: var(--space-xs);
 }
 
 .title {
-	/* text-align: center; */
-	margin-bottom: var(--space-xs);
+  color: var(--react-accent);
+  text-align: center;
+  margin-bottom: var(--space-xs);
+  font-size: var(--fontSize-2);
 }
 
+.titleDarker {
+  composes: title;
+  color: var(--react-accent-1);
+}
+
+/* .react {
+  color: var(--react-accent);
+} */
+
+/* Styles for profile image */
+.imgWrapper {
+  align-self: center;
+  padding-top: var(--space-xs);
+}
+.img {
+  width: clamp(7rem, 8rem, 10rem);
+  height: clamp(7rem, 8rem, 10rem);
+  border-radius: 50%;
+}
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  font-style: normal;
+}
 .address {
-	display: flex;
-	align-items: center;
-	gap: var(--space-2xs);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+.addressLink {
+  display: flex;
+  flex-flow: row wrap;
+  gap: var(--space-3xs);
+}
+
+.detail {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
 }
 
 .svg {
-	width: 15px;
-	height: 15px;
-	padding: 0;
-	margin: 0;
-	border: none;
-	background-color: transparent;
-	stroke: var(--react);
-	cursor: pointer;
-	fill: none;
-
-	&:hover,
-	:focus {
-		stroke: var(--accent-2);
-	}
+  width: var(--fontSize-0);
+  height: var(--fontSize-0);
+  padding: 0;
+  margin: 0;
+  border: none;
+  background-color: transparent;
+  stroke: var(--react-accent);
+  cursor: pointer;
+  fill: none;
 }
 
-/* .meter meter {
-	 -moz-appearance: none;
-	 -webkit-appearance: none; /* Reset appearance 
-  width: 500px;
-  height: 25px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  background-color: #087ea4;
-}
-
-.meter meter:-moz-meter-optimum::-moz-meter-bar,
-.meter meter:-moz-meter-sub-optimum::-moz-meter-bar,
-.meter meter:-moz-meter-sub-sub-optimum::-moz-meter-bar,
-.meter meter:-webkit-meter-bar,
-meter::-moz-meter-bar  {
-  background: none;  Required to get rid of the default background property 
-  background-color: var(--react);
-  box-shadow: 0 5px 5px -5px #333 inset;
-}
-
-.meter meter::-webkit-meter-optimum-value {
-  box-shadow: 0 5px 5px -5px #999 inset;
-  background-color: #087ea4;
-  background-size: 100% 100%;
-}
- */
-
-.styled meter {
-	/* Reset the default appearance */
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	appearance: none;
-
-	width: 100%;
-	height: 30px;
-
-	/* For Firefox */
-	background: #eee;
-	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2) inset;
-	border-radius: 3px;
-}
-
-/* WebKit */
-.styled meter::-webkit-meter-bar {
-	background: #eee;
-	box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2) inset;
-	border-radius: 3px;
-}
-
-.styled meter::-webkit-meter-optimum-value,
-.styled meter::-webkit-meter-suboptimum-value,
-.styled meter::-webkit-meter-even-less-good-value {
-	border-radius: 3px;
-}
-
-.styled meter::-webkit-meter-optimum-value {
-	background: var(--react);
-}
-
-.styled meter::-webkit-meter-suboptimum-value {
-	background: var(--accent);
-}
-
-.styled meter::-webkit-meter-even-less-good-value {
-	background: var(--accent-2);
-}
-
-/* Firefox */
-.styled meter::-moz-meter-bar {
-	border-radius: 3px;
-}
-
-.styled meter:-moz-meter-optimum::-moz-meter-bar {
-	background: var(--react);
-}
-
-.styled meter:-moz-meter-sub-optimum::-moz-meter-bar {
-	background: var(--accent);
-}
-
-.styled meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
-	background: var(--accent-2);
-}
+/* Styles for languages */
 .langItem {
-	display: flex;
-	gap: var(--space-xs);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-items: flex-start;
 }
-.bar {
-	display: flex;
-	gap: var(--space-xs);
-justify-content: center;
+.level {
+  display: flex;
+  gap: var(--space-3xs);
 }
 .svgMeter {
-	width: 18px;
-	height: 18px;
-	fill: #61DAFB;
+  align-self: flex-end;
+  width: var(--fontSize-0);
+  height: var(--fontSize-0);
+  fill: var(--react-accent);
 }
 
-.line {
-	color: #61DAFB;
-	&:last-child {
-		display: none;
-	}
+/* Styles for main */
+.header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--react-bg);
+}
+
+.headerTitle {
+  width: 100%;
+  text-align: center;
+}
+
+.name {
+  font-size: var(--fontSize-4);
+  color: var(--react-accent-1);
+}
+
+.position {
+  font-size: var(--fontSize-2);
+  color: var(--react-bg);
+}
+.profile {
+  font-size: var(--fontSize--2);
+  font-weight: 500;
+  color: var(--react-text-3);
+}
+
+.date {
+  font-weight: 500;
+  text-align: right;
+  color: var(--react-text-3);
+}
+
+.workList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  color: var(--react-text-2);
+}
+
+.workItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.workDescription {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+.svgWork {
+  width: var(--fontSize-0);
+  height: var(--fontSize-0);
+  fill: var(--react-accent-1);
+}
+
+.item {
+  color: var(--react-bg);
+}
+
+.letterContainer {
+  width: 100%;
+  font-size: var(--fontSize-1);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+.letterDate {
+  align-self: flex-end;
+}
+
+.letterTitle {
+  font-weight: 600;
 }
